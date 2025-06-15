@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect, memo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Zap,
@@ -18,6 +18,326 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+
+// Add this new component before the main Component
+const AnimatedInterfaceContainer = memo(({ children }: { children: React.ReactNode }) => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track mouse movement for interactive effects
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: ((e.clientX - rect.left) / rect.width) * 100,
+          y: ((e.clientY - rect.top) / rect.height) * 100,
+        });
+      }
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('mousemove', handleMouseMove);
+      return () => container.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
+
+  // Generate dynamic star particles
+  const starParticles = useMemo(() => {
+    return Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2 + 1,
+      delay: Math.random() * 4,
+      duration: 3 + Math.random() * 2,
+    }));
+  }, []);
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-black/40 backdrop-blur-xl border border-white/10"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+      whileHover={{ scale: 1.02 }}
+      style={{
+        boxShadow: `
+          0 0 30px rgba(255, 255, 255, 0.1),
+          0 0 60px rgba(255, 255, 255, 0.05),
+          inset 0 0 20px rgba(255, 255, 255, 0.05)
+        `,
+      }}
+    >
+      {/* Interactive gradient overlay */}
+      <motion.div
+        className="absolute inset-0 opacity-30"
+        animate={{
+          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
+            rgba(255, 255, 255, 0.15) 0%, 
+            rgba(255, 255, 255, 0.05) 25%, 
+            transparent 50%)`,
+        }}
+        transition={{ duration: 0.1 }}
+      />
+
+      {/* Animated border glow */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl sm:rounded-3xl"
+        style={{
+          boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.1)',
+        }}
+        animate={{
+          boxShadow: [
+            'inset 0 0 20px rgba(255, 255, 255, 0.1)',
+            'inset 0 0 30px rgba(255, 255, 255, 0.15)',
+            'inset 0 0 20px rgba(255, 255, 255, 0.1)',
+          ],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: 'easeInOut',
+        }}
+      />
+
+      {/* Star particles */}
+      {starParticles.map((star) => (
+        <motion.div
+          key={star.id}
+          className="absolute bg-white rounded-full"
+          style={{
+            left: `${star.x}%`,
+            top: `${star.y}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            opacity: 0.6,
+          }}
+          animate={{
+            opacity: [0.2, 0.8, 0.2],
+            scale: [0.8, 1.2, 0.8],
+            x: [0, (Math.random() - 0.5) * 20, 0],
+            y: [0, (Math.random() - 0.5) * 20, 0],
+          }}
+          transition={{
+            duration: star.duration,
+            repeat: Number.POSITIVE_INFINITY,
+            delay: star.delay,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+
+      {/* Cosmic energy lines */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%)',
+        }}
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%'],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: 'linear',
+        }}
+      />
+
+      {/* Content wrapper with glass effect */}
+      <div className="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12">
+        {children}
+      </div>
+
+      {/* Hover effect overlay */}
+      <motion.div
+        className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
+        }}
+        whileHover={{
+          opacity: 1,
+        }}
+      />
+    </motion.div>
+  );
+});
+
+AnimatedInterfaceContainer.displayName = 'AnimatedInterfaceContainer';
+
+// Add this new component before the main Component
+const AnimatedInterfaceBadge = memo(() => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const badgeRef = useRef<HTMLDivElement>(null);
+
+  // Track mouse movement for interactive effects
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (badgeRef.current) {
+        const rect = badgeRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: ((e.clientX - rect.left) / rect.width) * 100,
+          y: ((e.clientY - rect.top) / rect.height) * 100,
+        });
+      }
+    };
+
+    const badge = badgeRef.current;
+    if (badge) {
+      badge.addEventListener('mousemove', handleMouseMove);
+      return () => badge.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
+
+  // Generate dynamic star particles
+  const starParticles = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 1.5 + 0.5,
+      delay: Math.random() * 2,
+      duration: 2 + Math.random() * 1.5,
+    }));
+  }, []);
+
+  return (
+    <motion.div
+      ref={badgeRef}
+      className="inline-flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 relative overflow-hidden group"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ 
+        scale: 1.05,
+        boxShadow: "0 0 30px rgba(255, 255, 255, 0.2)",
+      }}
+      transition={{ duration: 0.3 }}
+      style={{
+        boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)",
+      }}
+    >
+      {/* Interactive gradient overlay */}
+      <motion.div
+        className="absolute inset-0 opacity-30"
+        animate={{
+          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
+            rgba(255, 255, 255, 0.2) 0%, 
+            rgba(255, 255, 255, 0.1) 25%, 
+            transparent 50%)`,
+        }}
+        transition={{ duration: 0.1 }}
+      />
+
+      {/* Animated border glow */}
+      <motion.div
+        className="absolute inset-0 rounded-full"
+        style={{
+          boxShadow: 'inset 0 0 15px rgba(255, 255, 255, 0.1)',
+        }}
+        animate={{
+          boxShadow: [
+            'inset 0 0 15px rgba(255, 255, 255, 0.1)',
+            'inset 0 0 25px rgba(255, 255, 255, 0.15)',
+            'inset 0 0 15px rgba(255, 255, 255, 0.1)',
+          ],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: 'easeInOut',
+        }}
+      />
+
+      {/* Star particles */}
+      {starParticles.map((star) => (
+        <motion.div
+          key={star.id}
+          className="absolute bg-white rounded-full"
+          style={{
+            left: `${star.x}%`,
+            top: `${star.y}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            opacity: 0.6,
+          }}
+          animate={{
+            opacity: [0.2, 0.8, 0.2],
+            scale: [0.8, 1.2, 0.8],
+            x: [0, (Math.random() - 0.5) * 10, 0],
+            y: [0, (Math.random() - 0.5) * 10, 0],
+          }}
+          transition={{
+            duration: star.duration,
+            repeat: Number.POSITIVE_INFINITY,
+            delay: star.delay,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+
+      {/* Cosmic energy lines */}
+      <motion.div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%)',
+        }}
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%'],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: 'linear',
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 flex items-center">
+        <motion.div
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
+        >
+          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-white" />
+        </motion.div>
+        <motion.span 
+          className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide"
+          animate={{
+            textShadow: [
+              "0 0 5px rgba(255, 255, 255, 0.5)",
+              "0 0 10px rgba(255, 255, 255, 0.7)",
+              "0 0 5px rgba(255, 255, 255, 0.5)",
+            ],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
+        >
+          New interface
+        </motion.span>
+      </div>
+
+      {/* Hover effect overlay */}
+      <motion.div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.15) 0%, transparent 50%)',
+        }}
+      />
+    </motion.div>
+  );
+});
+
+AnimatedInterfaceBadge.displayName = 'AnimatedInterfaceBadge';
 
 export default function Component() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -380,21 +700,8 @@ export default function Component() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12 xl:space-y-16 relative z-30"
           >
-            {/* Glassmorphic Badge with Perfect Responsive Sizing */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 relative z-30 hover:bg-white/15 hover:scale-105 transition-all duration-300"
-              style={{
-                boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
-              }}
-            >
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-white" />
-              <span className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide">
-                New interface
-              </span>
-            </motion.div>
+            {/* Replace the old badge with the new animated one */}
+            <AnimatedInterfaceBadge />
 
             {/* Hero Title with Perfect Responsive Typography */}
             <motion.h1
@@ -526,112 +833,114 @@ export default function Component() {
       {/* Features Section with Perfect Responsive Layout */}
       <section className="relative z-20 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
         <div className="container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 relative z-30"
-          >
-            <h2
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white font-outfit tracking-wide max-w-5xl mx-auto"
-              style={{
-                textShadow: "0 0 30px rgba(255, 255, 255, 0.4)",
-                lineHeight: "1.2",
-              }}
+          <AnimatedInterfaceContainer>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 relative z-30"
             >
-              Why Choose Lumozion?
-            </h2>
-            <p
-              className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto font-light leading-relaxed font-mulish px-2 sm:px-0"
-              style={{
-                textShadow: "0 0 15px rgba(255, 255, 255, 0.2)",
-                lineHeight: "1.6",
-              }}
-            >
-              Discover the features that make us the future of web development
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
-            {[
-              {
-                icon: <Zap className="w-8 h-8 sm:w-10 sm:h-10" />,
-                title: "Lightning Fast",
-                description:
-                  "Experience blazing fast loading times and seamless interactions with our optimized platform",
-              },
-              {
-                icon: <Shield className="w-8 h-8 sm:w-10 sm:h-10" />,
-                title: "Secure & Safe",
-                description:
-                  "Advanced security measures and encryption to protect your data and transactions",
-              },
-              {
-                icon: <Sparkles className="w-8 h-8 sm:w-10 sm:h-10" />,
-                title: "AI Powered",
-                description:
-                  "Intelligent recommendations and personalized development experience powered by artificial intelligence",
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-                whileHover={{
-                  scale: 1.03,
-                  y: -8,
-                  boxShadow: "0 20px 40px rgba(255, 255, 255, 0.1)",
+              <h2
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white font-outfit tracking-wide max-w-5xl mx-auto"
+                style={{
+                  textShadow: "0 0 30px rgba(255, 255, 255, 0.4)",
+                  lineHeight: "1.2",
                 }}
-                className="group relative z-30"
-                style={{ willChange: "transform" }}
               >
-                <Card
-                  className="p-6 sm:p-8 md:p-10 lg:p-12 bg-white/5 backdrop-blur-md border border-white/20 hover:bg-white/8 transition-all duration-500 h-full rounded-2xl sm:rounded-3xl"
-                  style={{
-                    boxShadow: "0 0 25px rgba(255, 255, 255, 0.1)",
+                Why Choose Lumozion?
+              </h2>
+              <p
+                className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto font-light leading-relaxed font-mulish px-2 sm:px-0"
+                style={{
+                  textShadow: "0 0 15px rgba(255, 255, 255, 0.2)",
+                  lineHeight: "1.6",
+                }}
+              >
+                Discover the features that make us the future of web development
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+              {[
+                {
+                  icon: <Zap className="w-8 h-8 sm:w-10 sm:h-10" />,
+                  title: "Lightning Fast",
+                  description:
+                    "Experience blazing fast loading times and seamless interactions with our optimized platform",
+                },
+                {
+                  icon: <Shield className="w-8 h-8 sm:w-10 sm:h-10" />,
+                  title: "Secure & Safe",
+                  description:
+                    "Advanced security measures and encryption to protect your data and transactions",
+                },
+                {
+                  icon: <Sparkles className="w-8 h-8 sm:w-10 sm:h-10" />,
+                  title: "AI Powered",
+                  description:
+                    "Intelligent recommendations and personalized development experience powered by artificial intelligence",
+                },
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2, duration: 0.6 }}
+                  whileHover={{
+                    scale: 1.03,
+                    y: -8,
+                    boxShadow: "0 20px 40px rgba(255, 255, 255, 0.1)",
                   }}
+                  className="group relative z-30"
+                  style={{ willChange: "transform" }}
                 >
-                  <div className="text-center space-y-4 sm:space-y-6">
-                    <motion.div
-                      className="inline-flex p-4 sm:p-5 md:p-6 rounded-2xl sm:rounded-3xl bg-white/10 text-white backdrop-blur-md border border-white/20"
-                      whileHover={{
-                        scale: 1.1,
-                        boxShadow: "0 15px 30px rgba(255, 255, 255, 0.2)",
-                      }}
-                      transition={{ duration: 0.3 }}
-                      style={{
-                        boxShadow: "0 0 20px rgba(255, 255, 255, 0.2)",
-                        willChange: "transform",
-                      }}
-                    >
-                      {feature.icon}
-                    </motion.div>
-                    <h3
-                      className="text-xl sm:text-2xl md:text-3xl font-bold text-white font-outfit"
-                      style={{
-                        textShadow: "0 0 15px rgba(255, 255, 255, 0.3)",
-                        lineHeight: "1.3",
-                      }}
-                    >
-                      {feature.title}
-                    </h3>
-                    <p
-                      className="text-white/90 leading-relaxed text-sm sm:text-base md:text-lg font-light font-mulish"
-                      style={{
-                        textShadow: "0 0 8px rgba(255, 255, 255, 0.15)",
-                        lineHeight: "1.7",
-                      }}
-                    >
-                      {feature.description}
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                  <Card
+                    className="p-6 sm:p-8 md:p-10 lg:p-12 bg-white/5 backdrop-blur-md border border-white/20 hover:bg-white/8 transition-all duration-500 h-full rounded-2xl sm:rounded-3xl"
+                    style={{
+                      boxShadow: "0 0 25px rgba(255, 255, 255, 0.1)",
+                    }}
+                  >
+                    <div className="text-center space-y-4 sm:space-y-6">
+                      <motion.div
+                        className="inline-flex p-4 sm:p-5 md:p-6 rounded-2xl sm:rounded-3xl bg-white/10 text-white backdrop-blur-md border border-white/20"
+                        whileHover={{
+                          scale: 1.1,
+                          boxShadow: "0 15px 30px rgba(255, 255, 255, 0.2)",
+                        }}
+                        transition={{ duration: 0.3 }}
+                        style={{
+                          boxShadow: "0 0 20px rgba(255, 255, 255, 0.2)",
+                          willChange: "transform",
+                        }}
+                      >
+                        {feature.icon}
+                      </motion.div>
+                      <h3
+                        className="text-xl sm:text-2xl md:text-3xl font-bold text-white font-outfit"
+                        style={{
+                          textShadow: "0 0 15px rgba(255, 255, 255, 0.3)",
+                          lineHeight: "1.3",
+                        }}
+                      >
+                        {feature.title}
+                      </h3>
+                      <p
+                        className="text-white/90 leading-relaxed text-sm sm:text-base md:text-lg font-light font-mulish"
+                        style={{
+                          textShadow: "0 0 8px rgba(255, 255, 255, 0.15)",
+                          lineHeight: "1.7",
+                        }}
+                      >
+                        {feature.description}
+                      </p>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </AnimatedInterfaceContainer>
         </div>
       </section>
 
