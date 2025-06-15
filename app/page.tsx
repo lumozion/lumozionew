@@ -367,6 +367,126 @@ export default function Component() {
     );
   };
 
+  const FuturisticText = ({ children }: { children: React.ReactNode }) => {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const textRef = useRef<HTMLDivElement>(null);
+
+    // Mouse tracking for gradient effect
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+      if (textRef.current) {
+        const rect = textRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: ((e.clientX - rect.left) / rect.width) * 100,
+          y: ((e.clientY - rect.top) / rect.height) * 100,
+        });
+      }
+    }, []);
+
+    return (
+      <motion.div
+        ref={textRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => setMousePosition({ x: 50, y: 50 })}
+        className="relative inline-block"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Glowing background effect */}
+        <motion.div
+          className="absolute inset-0 rounded-lg"
+          animate={{
+            background: [
+              "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)",
+              "radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 70%)",
+              "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)",
+            ],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Interactive gradient overlay */}
+        <motion.div
+          className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(255,255,255,0.2) 0%, transparent 50%)`,
+          }}
+        />
+
+        {/* Text with multiple effects */}
+        <motion.div
+          className="relative z-10"
+          animate={{
+            textShadow: [
+              "0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3)",
+              "0 0 30px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 255, 255, 0.5), 0 0 80px rgba(255, 0, 255, 0.3)",
+              "0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3)",
+            ],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          {/* Glitch effect overlay */}
+          <motion.div
+            className="absolute inset-0 opacity-0"
+            animate={{
+              opacity: [0, 0.1, 0],
+              x: [0, 2, -2, 0],
+              y: [0, -1, 1, 0],
+            }}
+            transition={{
+              duration: 0.2,
+              repeat: Infinity,
+              repeatDelay: 3,
+              ease: "easeInOut",
+            }}
+          >
+            {children}
+          </motion.div>
+
+          {/* Main text */}
+          <motion.div
+            className="relative"
+            animate={{
+              filter: [
+                "brightness(1) contrast(1)",
+                "brightness(1.2) contrast(1.1)",
+                "brightness(1) contrast(1)",
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            {children}
+          </motion.div>
+
+          {/* Shimmer effect */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            animate={{
+              x: ["-100%", "100%"],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        </motion.div>
+      </motion.div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
       {/* Animated Background with Subtle Movement */}
@@ -653,16 +773,13 @@ export default function Component() {
               }}
             >
               <span className="relative z-10">
-                Future Of
+                <FuturisticText>Future Of</FuturisticText>
                 <br />
-                <span
-                  className="text-white font-outfit relative"
-                  style={{
-                    textShadow: "0 0 40px rgba(255, 255, 255, 0.6)",
-                  }}
-                >
-                  Web Development
-                </span>
+                <FuturisticText>
+                  <span className="text-white font-outfit relative">
+                    Web Development
+                  </span>
+                </FuturisticText>
               </span>
             </motion.h1>
 
