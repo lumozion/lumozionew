@@ -296,6 +296,7 @@ const AnimatedInterfaceBadge = memo(() => {
       {/* Content */}
       <div className="relative z-10 flex items-center">
         <motion.div
+          className="relative"
           animate={{
             rotate: [0, 360],
           }}
@@ -305,7 +306,19 @@ const AnimatedInterfaceBadge = memo(() => {
             ease: "linear",
           }}
         >
-          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-white" />
+          <motion.div
+            className="absolute -inset-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+            animate={{
+              x: ["-100%", "100%"],
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-3 text-white/80" />
         </motion.div>
         <motion.span 
           className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide"
