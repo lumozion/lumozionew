@@ -225,6 +225,9 @@ export default function Component() {
                 }}
               >
                 LUMOZION
+                {Array.from({ length: 10 }, (_, i) => (
+                  <span key={i} className="star" />
+                ))}
               </h1>
             </motion.div>
 
