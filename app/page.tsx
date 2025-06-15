@@ -999,18 +999,33 @@ export default function Component() {
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
               <Card
-                className="p-6 sm:p-8 md:p-10 lg:p-12 bg-white/5 backdrop-blur-md border border-white/20 hover:bg-white/8 transition-all duration-500 rounded-2xl sm:rounded-3xl max-w-md w-full relative overflow-hidden"
+                className="p-6 sm:p-8 md:p-10 lg:p-12 bg-white/5 backdrop-blur-md border border-white/20 hover:bg-white/8 transition-all duration-500 rounded-2xl sm:rounded-3xl max-w-md w-full relative overflow-hidden group"
                 style={{
                   boxShadow: "0 0 30px rgba(255, 255, 255, 0.15)",
                 }}
               >
-                {/* Hover Glow Effect */}
+                {/* Enhanced Hover Glow Effect */}
                 <motion.div
                   className="absolute inset-0 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   whileHover={{ opacity: 0.3 }}
                   style={{
-                    background:
-                      "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                    background: "radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 70%)",
+                  }}
+                />
+
+                {/* Shimmer Effect */}
+                <motion.div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  initial={{ x: "-100%" }}
+                  whileHover={{
+                    x: "100%",
+                    transition: {
+                      duration: 1.5,
+                      ease: "easeInOut",
+                    },
+                  }}
+                  style={{
+                    background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)",
                   }}
                 />
 
@@ -1023,12 +1038,10 @@ export default function Component() {
                     <motion.div
                       className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mx-auto rounded-full overflow-hidden border-2 border-white/30 backdrop-blur-sm relative"
                       style={{
-                        boxShadow:
-                          "0 8px 32px rgba(255, 255, 255, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.1)",
+                        boxShadow: "0 8px 32px rgba(255, 255, 255, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.1)",
                       }}
                       whileHover={{
-                        boxShadow:
-                          "0 12px 40px rgba(255, 255, 255, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.15)",
+                        boxShadow: "0 12px 40px rgba(255, 255, 255, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.15)",
                       }}
                     >
                       <img
@@ -1036,70 +1049,77 @@ export default function Component() {
                         alt="Ashwin Asthana"
                         className="w-full h-full object-cover transition-all duration-500"
                         style={{
-                          filter:
-                            "brightness(1.1) contrast(1.1) saturate(1.05)",
+                          filter: "brightness(1.1) contrast(1.1) saturate(1.05)",
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
-                      {/* Subtle Inner Glow */}
+                      {/* Enhanced Inner Glow */}
                       <motion.div
                         className="absolute inset-0 rounded-full"
                         style={{
-                          background:
-                            "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%)",
+                          background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 50%)",
                         }}
                         animate={{
                           opacity: [0.3, 0.6, 0.3],
+                          scale: [1, 1.1, 1],
                         }}
                         transition={{
                           duration: 4,
-                          repeat: Number.POSITIVE_INFINITY,
+                          repeat: Infinity,
                           ease: "easeInOut",
                         }}
                       />
-                    </motion.div>
 
-                    {/* Enhanced Rotating Glow Ring */}
-                    <motion.div
-                      className="absolute inset-0 rounded-full border-2 border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        boxShadow:
-                          "0 0 25px rgba(255, 255, 255, 0.4), inset 0 0 25px rgba(255, 255, 255, 0.1)",
-                      }}
-                      animate={{
-                        rotate: 360,
-                      }}
-                      transition={{
-                        duration: 8,
-                        repeat: Number.POSITIVE_INFINITY,
-                        ease: "linear",
-                      }}
-                    />
+                      {/* Rotating Glow Ring */}
+                      <motion.div
+                        className="absolute inset-0 rounded-full border-2 border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{
+                          boxShadow: "0 0 25px rgba(255, 255, 255, 0.4), inset 0 0 25px rgba(255, 255, 255, 0.1)",
+                        }}
+                        animate={{
+                          rotate: 360,
+                          scale: [1, 1.05, 1],
+                        }}
+                        transition={{
+                          rotate: {
+                            duration: 8,
+                            repeat: Infinity,
+                            ease: "linear",
+                          },
+                          scale: {
+                            duration: 4,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          },
+                        }}
+                      />
 
-                    {/* Floating Particles on Hover */}
-                    <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      {Array.from({ length: 4 }, (_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-1 h-1 bg-white/60 rounded-full"
-                          style={{
-                            left: `${20 + i * 20}%`,
-                            top: `${20 + (i % 2) * 60}%`,
-                          }}
-                          animate={{
-                            scale: [0, 1, 0],
-                            opacity: [0, 1, 0],
-                            y: [0, -20, -40],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Number.POSITIVE_INFINITY,
-                            delay: i * 0.3,
-                            ease: "easeOut",
-                          }}
-                        />
-                      ))}
+                      {/* Enhanced Floating Particles */}
+                      <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        {Array.from({ length: 6 }, (_, i) => (
+                          <motion.div
+                            key={i}
+                            className="absolute w-1 h-1 bg-white/60 rounded-full"
+                            style={{
+                              left: `${20 + i * 15}%`,
+                              top: `${20 + (i % 2) * 60}%`,
+                            }}
+                            animate={{
+                              scale: [0, 1, 0],
+                              opacity: [0, 1, 0],
+                              y: [0, -20, -40],
+                              x: [0, (i % 2 ? 10 : -10), 0],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              delay: i * 0.2,
+                              ease: "easeOut",
+                            }}
+                          />
+                        ))}
+                      </motion.div>
                     </motion.div>
                   </motion.div>
 
@@ -1110,22 +1130,26 @@ export default function Component() {
                     transition={{ delay: 0.3, duration: 0.8 }}
                   >
                     <h3
-                      className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 font-outfit"
+                      className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 font-outfit relative"
                       style={{
                         textShadow: "0 0 15px rgba(255, 255, 255, 0.3)",
                         lineHeight: "1.3",
                       }}
                     >
-                      Ashwin Asthana
+                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-200 to-white bg-[length:200%_100%] animate-shimmer">
+                        Ashwin Asthana
+                      </span>
                     </h3>
                     <p
-                      className="text-white/80 text-sm sm:text-base md:text-lg font-light font-mulish"
+                      className="text-white/80 text-sm sm:text-base md:text-lg font-light font-mulish relative"
                       style={{
                         textShadow: "0 0 8px rgba(255, 255, 255, 0.15)",
                         lineHeight: "1.5",
                       }}
                     >
-                      CEO
+                      <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-300 via-white to-gray-300 bg-[length:200%_100%] animate-shimmer">
+                        CEO
+                      </span>
                     </p>
                   </motion.div>
                 </div>
