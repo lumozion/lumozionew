@@ -206,120 +206,25 @@ const AnimatedInterfaceBadge = memo(() => {
   return (
     <motion.div
       ref={badgeRef}
-      className="inline-flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 relative overflow-hidden group"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ 
-        scale: 1.05,
-        boxShadow: "0 0 30px rgba(255, 255, 255, 0.2)",
+      className="relative inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-sm border border-white/10"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      animate={{
+        boxShadow: [
+          "0 0 10px rgba(147, 51, 234, 0.2)",
+          "0 0 20px rgba(147, 51, 234, 0.3)",
+          "0 0 10px rgba(147, 51, 234, 0.2)"
+        ]
       }}
-      transition={{ duration: 0.3 }}
-      style={{
-        boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)",
+      transition={{
+        boxShadow: {
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }
       }}
     >
-      {/* Interactive gradient overlay */}
-      <motion.div
-        className="absolute inset-0 opacity-30"
-        animate={{
-          background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
-            rgba(255, 255, 255, 0.2) 0%, 
-            rgba(255, 255, 255, 0.1) 25%, 
-            transparent 50%)`,
-        }}
-        transition={{ duration: 0.1 }}
-      />
-
-      {/* Animated border glow */}
-      <motion.div
-        className="absolute inset-0 rounded-full"
-        style={{
-          boxShadow: 'inset 0 0 15px rgba(255, 255, 255, 0.1)',
-        }}
-        animate={{
-          boxShadow: [
-            'inset 0 0 15px rgba(255, 255, 255, 0.1)',
-            'inset 0 0 25px rgba(255, 255, 255, 0.15)',
-            'inset 0 0 15px rgba(255, 255, 255, 0.1)',
-          ],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: 'easeInOut',
-        }}
-      />
-
-      {/* Star particles */}
-      {starParticles.map((star) => (
-        <motion.div
-          key={star.id}
-          className="absolute bg-white rounded-full"
-          style={{
-            left: `${star.x}%`,
-            top: `${star.y}%`,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            opacity: 0.6,
-          }}
-          animate={{
-            opacity: [0.2, 0.8, 0.2],
-            scale: [0.8, 1.2, 0.8],
-            x: [0, (Math.random() - 0.5) * 10, 0],
-            y: [0, (Math.random() - 0.5) * 10, 0],
-          }}
-          transition={{
-            duration: star.duration,
-            repeat: Number.POSITIVE_INFINITY,
-            delay: star.delay,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-
-      {/* Cosmic energy lines */}
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%)',
-        }}
-        animate={{
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: 'linear',
-        }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 flex items-center">
-        <motion.div
-          className="absolute left-0"
-          animate={{
-            opacity: [0.6, 1, 0.6],
-            scale: [0.9, 1.1, 0.9],
-            x: [0, 2, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <span className="text-white/90 text-lg mr-4">✨</span>
-        </motion.div>
-        <span className="ml-2">New</span>
-      </div>
-
-      {/* Hover effect overlay */}
-      <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{
-          background: 'radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.15) 0%, transparent 50%)',
-        }}
-      />
+      <span className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide">New interface</span>
     </motion.div>
   );
 });
