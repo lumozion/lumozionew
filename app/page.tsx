@@ -242,73 +242,15 @@ export default function Component() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="text-white/90 hover:text-white transition-all duration-300 relative group font-medium font-mulish text-sm lg:text-base xl:text-lg overflow-hidden"
-                  style={{
-                    willChange: "transform",
-                    textShadow: "0 0 8px rgba(255, 255, 255, 0.2)",
-                  }}
                 >
                   {/* Starlight Glow Background */}
-                  <motion.div
-                    className="absolute inset-0 -z-10 rounded-lg bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100"
-                    initial={{ x: "-100%" }}
-                    whileHover={{
-                      x: "100%",
-                      transition: {
-                        duration: 0.6,
-                        ease: "easeInOut",
-                      },
-                    }}
-                    style={{
-                      background:
-                        "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 20%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 80%, transparent 100%)",
-                      filter: "blur(1px)",
-                    }}
-                  />
+
 
                   {/* Cosmic Glow Effect */}
-                  <motion.div
-                    className="absolute inset-0 -z-20 rounded-lg opacity-0 group-hover:opacity-100"
-                    animate={{
-                      boxShadow: [
-                        "0 0 0px rgba(255,255,255,0)",
-                        "0 0 20px rgba(255,255,255,0.3)",
-                        "0 0 0px rgba(255,255,255,0)",
-                      ],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Number.POSITIVE_INFINITY,
-                      ease: "easeInOut",
-                    }}
-                  />
+                  
 
                   {/* Starlight Particles */}
-                  <motion.div
-                    className="absolute inset-0 -z-30 opacity-0 group-hover:opacity-100"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                  >
-                    {Array.from({ length: 3 }, (_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-1 h-1 bg-white rounded-full"
-                        style={{
-                          left: `${20 + i * 30}%`,
-                          top: `${30 + i * 20}%`,
-                        }}
-                        animate={{
-                          scale: [0, 1, 0],
-                          opacity: [0, 1, 0],
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Number.POSITIVE_INFINITY,
-                          delay: i * 0.2,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    ))}
-                  </motion.div>
+                  
 
                   <span className="relative z-10">{item.name}</span>
 
@@ -339,21 +281,7 @@ export default function Component() {
               style={{ willChange: "transform" }}
             >
               {/* Button Glow Effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/20 to-white/10 opacity-0"
-                animate={
-                  isMenuOpen
-                    ? {
-                        opacity: [0, 0.5, 0],
-                        scale: [0.8, 1.2, 0.8],
-                      }
-                    : {}
-                }
-                transition={{
-                  duration: 0.6,
-                  ease: "easeInOut",
-                }}
-              />
+              
               {isMenuOpen ? (
                 <X className="relative z-10 w-5 h-5" />
               ) : (
@@ -379,49 +307,11 @@ export default function Component() {
             className="md:hidden backdrop-blur-md bg-white/10 border-t border-white/20 rounded-b-2xl sm:rounded-b-3xl mx-3 sm:mx-4 mb-3 sm:mb-4 relative z-40 overflow-hidden"
           >
             {/* Starlight Burst Background */}
-            <motion.div
-              className="absolute inset-0 opacity-30"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{
-                scale: [0, 1.5, 1],
-                opacity: [0, 0.6, 0.3],
-                background: [
-                  "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.1) 0%, transparent 70%)",
-                  "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.3) 0%, transparent 70%)",
-                  "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.1) 0%, transparent 70%)",
-                ],
-              }}
-              transition={{
-                duration: 0.8,
-                ease: "easeOut",
-                times: [0, 0.5, 1],
-              }}
-            />
+          
+  
 
             {/* Cosmic Particles */}
-            <div className="absolute inset-0 overflow-hidden">
-              {Array.from({ length: 6 }, (_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 bg-white/60 rounded-full"
-                  style={{
-                    left: `${10 + i * 15}%`,
-                    top: `${20 + (i % 2) * 40}%`,
-                  }}
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{
-                    scale: [0, 1, 0],
-                    opacity: [0, 1, 0],
-                    y: [0, -20, -40],
-                  }}
-                  transition={{
-                    duration: 1.2,
-                    delay: i * 0.1,
-                    ease: "easeOut",
-                  }}
-                />
-              ))}
-            </div>
+          
 
             <div className="px-4 sm:px-6 py-5 sm:py-6 space-y-4 sm:space-y-6 relative z-10">
               {[
@@ -441,27 +331,9 @@ export default function Component() {
                     duration: 0.4,
                     ease: "easeOut",
                   }}
-                  whileHover={{
-                    x: 8,
-                    textShadow: "0 0 12px rgba(255, 255, 255, 0.4)",
-                    scale: 1.02,
-                  }}
-                  style={{
-                    textShadow: "0 0 8px rgba(255, 255, 255, 0.2)",
-                  }}
                 >
                   {/* Mobile Link Glow Effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 rounded-lg"
-                    initial={{ x: "-100%" }}
-                    whileHover={{
-                      x: "100%",
-                      transition: {
-                        duration: 0.5,
-                        ease: "easeInOut",
-                      },
-                    }}
-                  />
+                 
 
                   {/* Sparkle Effect */}
                   <motion.div
@@ -496,7 +368,7 @@ export default function Component() {
       {/* Hero Section with Perfect Responsive Typography */}
       <section
         id="home"
-        className="relative z-20 min-h-screen flex items-center justify-center px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 pt-16 sm:pt-20 md:pt-24"
+        className="relative z-20 min-h-screen flex items-center justify-center px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 -mt-14 sm:pt-20 md:pt-24"
       >
         <div className="container mx-auto text-center max-w-7xl">
           <motion.div
@@ -596,7 +468,7 @@ export default function Component() {
             willChange: "transform",
             boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)",
           }}
-          className="absolute top-16 left-2 w-12 h-12 sm:top-20 sm:left-4 sm:w-16 sm:h-16 md:top-24 md:left-8 md:w-20 md:h-20 lg:top-32 lg:left-16 lg:w-24 lg:h-24 xl:w-32 xl:h-32 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center hover:scale-110 transition-all duration-500"
+          className="absolute top-20 left-2 w-12 h-12 sm:top-20 sm:left-4 sm:w-16 sm:h-16 md:top-24 md:left-8 md:w-20 md:h-20 lg:top-32 lg:left-16 lg:w-24 lg:h-24 xl:w-32 xl:h-32 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center hover:scale-110 transition-all duration-500"
           animate={{
             rotate: 360,
             scale: [1, 1.05, 1],
@@ -951,7 +823,7 @@ export default function Component() {
           {/* Our Services Section */}
           <section
             id="services"
-            className="relative z-20 mb-12 sm:mb-16 md:mb-20 lg:mb-24"
+            className="relative z-20 mb-12 sm:mb-16 md:mb-20 lg:mb-24 min-h-screen"
           >
             {/* Services Header with Glitch Animation */}
             <motion.div
@@ -1131,6 +1003,52 @@ export default function Component() {
             </div>
 
             <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 relative z-30"
+            >
+              <motion.h2
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white font-outfit tracking-wide max-w-5xl mx-auto relative"
+                style={{
+                  textShadow: "0 0 30px rgba(255, 255, 255, 0.4)",
+                  lineHeight: "1.2",
+                }}
+                animate={{
+                  textShadow: [
+                    "0 0 30px rgba(255, 255, 255, 0.4)",
+                    "0 0 35px rgba(255, 255, 255, 0.6), 2px 0 0 rgba(255, 0, 255, 0.3)",
+                    "0 0 30px rgba(255, 255, 255, 0.4)",
+                  ],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                }}
+              >
+                Why us?
+                {/* Glitch overlay */}
+                <motion.span
+                  className="absolute inset-0 text-white/20"
+                  animate={{
+                    x: [0, 2, -2, 0],
+                    opacity: [0, 0.3, 0],
+                  }}
+                  transition={{
+                    duration: 0.2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    repeatDelay: 3,
+                    ease: "easeInOut",
+                  }}
+                >
+                  Why Us?
+                </motion.span>
+              </motion.h2>
+            </motion.div>
+
+            <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1146,41 +1064,33 @@ export default function Component() {
               >
                 <motion.span
                   className="font-semibold text-white"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
                 >
                   Expert Management
                 </motion.span>{" "}
                 — Our seasoned team brings years of industry expertise to guide
                 your project from conception to completion, ensuring every
-                detail meets the highest standards.{" "}
+                detail meets the highest standards.<br/><br/>
                 <motion.span
                   className="font-semibold text-white"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.4 }}
                 >
                   Secure Investment
                 </motion.span>{" "}
                 — Your investment is protected through our transparent
                 processes, milestone-based payments, and comprehensive project
-                insurance that guarantees delivery.{" "}
+                insurance that guarantees delivery.<br/><br/>
                 <motion.span
                   className="font-semibold text-white"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.6 }}
                 >
                   Increased Sales
                 </motion.span>{" "}
                 — Our data-driven approach and conversion-optimized designs have
                 consistently delivered 40-60% increases in client revenue within
-                the first quarter.{" "}
+                the first quarter.<br/><br/>
                 <motion.span
                   className="font-semibold text-white"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.8 }}
                 >
                   Happy Customers
@@ -1199,9 +1109,9 @@ export default function Component() {
         <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 max-w-7xl">
           {/* Main Footer Content */}
           <div className="py-8 sm:py-12 md:py-16 lg:py-20">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
               {/* Brand Section */}
-              <div className="lg:col-span-2 space-y-4 sm:space-y-6 text-center md:text-left">
+              <div className="space-y-4 sm:space-y-6 text-center md:text-left">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   className="inline-block"
@@ -1248,7 +1158,7 @@ export default function Component() {
                     <motion.button
                       key={item.name}
                       onClick={() => scrollToSection(item.id)}
-                      className="block w-full text-left text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
+                      className="block w-full text-center md:text-left text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
                       whileHover={{ x: 4 }}
                       style={{
                         textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
@@ -1262,62 +1172,6 @@ export default function Component() {
                     </motion.button>
                   ))}
                 </nav>
-              </div>
-
-              {/* Contact Info */}
-              <div className="space-y-4 sm:space-y-6 text-center md:text-left">
-                <h4
-                  className="text-base sm:text-lg font-semibold text-white font-outfit tracking-wide"
-                  style={{
-                    textShadow: "0 0 12px rgba(255, 255, 255, 0.2)",
-                  }}
-                >
-                  Connect
-                </h4>
-                <div className="space-y-2 sm:space-y-3">
-                  <motion.a
-                    href="#"
-                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
-                    whileHover={{ x: 4 }}
-                    style={{
-                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    <span className="relative">
-                      Contact Us
-                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
-                    </span>
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
-                    whileHover={{ x: 4 }}
-                    style={{
-                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    <span className="relative">
-                      Support
-                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
-                    </span>
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
-                    whileHover={{ x: 4 }}
-                    style={{
-                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    <span className="relative">
-                      Privacy Policy
-                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
-                    </span>
-                  </motion.a>
-                </div>
               </div>
             </div>
           </div>
