@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Zap,
@@ -105,6 +105,121 @@ export default function Component() {
       <circle cx="70" cy="100" r="3" fill="#ffffff" />
     </svg>
   );
+
+  const AnimatedInterfaceBadge = () => {
+    const badgeRef = useRef<HTMLDivElement>(null);
+    const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
+
+    // Generate star particles
+    const starParticles = useMemo(() => 
+      Array.from({ length: 5 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 2 + 1,
+        duration: Math.random() * 2 + 2,
+        delay: Math.random() * 2
+      })), []);
+
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+      if (badgeRef.current) {
+        const rect = badgeRef.current.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        setMousePosition({ x, y });
+      }
+    }, []);
+
+    return (
+      <motion.div
+        ref={badgeRef}
+        className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 relative overflow-hidden group"
+        onMouseMove={handleMouseMove}
+        whileHover={{ 
+          scale: 1.05,
+          boxShadow: "0 0 30px rgba(255, 255, 255, 0.2)",
+        }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Interactive gradient overlay */}
+        <motion.div
+          className="absolute inset-0 opacity-30"
+          animate={{
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, 
+              rgba(255, 255, 255, 0.2) 0%, 
+              rgba(255, 255, 255, 0.1) 25%, 
+              transparent 50%)`,
+          }}
+          transition={{ duration: 0.1 }}
+        />
+
+        {/* Star particles */}
+        {starParticles.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute bg-white rounded-full"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: 0.6,
+            }}
+            animate={{
+              opacity: [0.2, 0.8, 0.2],
+              scale: [0.8, 1.2, 0.8],
+              x: [0, (Math.random() - 0.5) * 5, 0],
+              y: [0, (Math.random() - 0.5) * 5, 0],
+            }}
+            transition={{
+              duration: star.duration,
+              repeat: Infinity,
+              delay: star.delay,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* Shimmer effect */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%)",
+          }}
+          animate={{
+            backgroundPosition: ["0% 0%", "100% 100%"],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+
+        {/* Content */}
+        <div className="relative z-10 flex items-center">
+          <motion.span
+            className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide"
+            animate={{
+              textShadow: [
+                "0 0 5px rgba(255, 255, 255, 0.5)",
+                "0 0 10px rgba(255, 255, 255, 0.7)",
+                "0 0 5px rgba(255, 255, 255, 0.5)",
+              ],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            New interface
+          </motion.span>
+        </div>
+      </motion.div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
@@ -381,20 +496,7 @@ export default function Component() {
             className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12 xl:space-y-16 relative z-30"
           >
             {/* Glassmorphic Badge with Perfect Responsive Sizing */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 relative z-30 hover:bg-white/15 hover:scale-105 transition-all duration-300"
-              style={{
-                boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
-              }}
-            >
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-white" />
-              <span className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide">
-                New interface
-              </span>
-            </motion.div>
+            <AnimatedInterfaceBadge />
 
             {/* Hero Title with Perfect Responsive Typography */}
             <motion.h1
