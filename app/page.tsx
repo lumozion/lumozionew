@@ -296,32 +296,46 @@ const AnimatedInterfaceBadge = memo(() => {
       {/* Content */}
       <div className="relative z-10 flex items-center">
         <motion.div
-          className="relative"
+          className="absolute left-0"
           animate={{
             rotate: [0, 360],
+            x: [0, 8, 0, -8, 0], // Subtle horizontal movement
+            y: [0, -4, 0, 4, 0], // Subtle vertical movement
           }}
           transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
+            rotate: {
+              duration: 12,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            },
+            x: {
+              duration: 4,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            },
+            y: {
+              duration: 4,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            },
           }}
         >
           <motion.div
-            className="absolute -inset-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"
             animate={{
-              x: ["-100%", "100%"],
-              opacity: [0, 0.5, 0],
+              opacity: [0.6, 1, 0.6],
+              scale: [0.9, 1.1, 0.9],
             }}
             transition={{
               duration: 2,
               repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
             }}
-          />
-          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-3 text-white/80" />
+          >
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-4 text-white/90" />
+          </motion.div>
         </motion.div>
         <motion.span 
-          className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide"
+          className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide ml-2"
           animate={{
             textShadow: [
               "0 0 5px rgba(255, 255, 255, 0.5)",
