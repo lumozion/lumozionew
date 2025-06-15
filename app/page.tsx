@@ -15,6 +15,10 @@ import {
   Code,
   Palette,
   Bot,
+  Users,
+  Lock,
+  TrendingUp,
+  Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -1365,7 +1369,10 @@ export default function Component() {
           </section>
 
           {/* Why Us Section */}
-          <section id="why-us" className="relative z-20 pt-10">
+          <section
+            id="why-us"
+            className="relative z-20 py-12 sm:py-16 xl:py-32 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12"
+          >
             {/* Starlight Particle Background */}
             <div className="absolute inset-0 overflow-hidden">
               {Array.from({ length: 20 }, (_, i) => (
@@ -1392,102 +1399,107 @@ export default function Component() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 relative z-30"
-            >
-              <motion.h2
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white font-outfit tracking-wide max-w-5xl mx-auto relative"
-                style={{
-                  textShadow: "0 0 30px rgba(255, 255, 255, 0.4)",
-                  lineHeight: "1.2",
-                }}
-                animate={{
-                  textShadow: [
-                    "0 0 30px rgba(255, 255, 255, 0.4)",
-                    "0 0 35px rgba(255, 255, 255, 0.6), 2px 0 0 rgba(255, 0, 255, 0.3)",
-                    "0 0 30px rgba(255, 255, 255, 0.4)",
-                  ],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
-              >
-                Why us?
-                {/* Glitch overlay */}
-                <motion.span
-                  className="absolute inset-0 text-white/20"
-                  animate={{
-                    x: [0, 2, -2, 0],
-                    opacity: [0, 0.3, 0],
-                  }}
-                  transition={{
-                    duration: 0.2,
-                    repeat: Number.POSITIVE_INFINITY,
-                    repeatDelay: 3,
-                    ease: "easeInOut",
-                  }}
-                >
-                  Why Us?
-                </motion.span>
-              </motion.h2>
-            </motion.div>
-
-            <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative z-10 max-w-6xl mx-auto"
+              className="relative z-10 max-w-6xl mx-auto space-y-8 sm:space-y-12"
             >
-              <p
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed font-light font-mulish px-2 sm:px-0 text-center"
-                style={{
-                  textShadow: "0 0 12px rgba(255, 255, 255, 0.15)",
-                  lineHeight: "2",
-                }}
-              >
-                <motion.span
-                  className="font-semibold text-white"
-                  transition={{ delay: 0.2 }}
+              {/* Expert Management */}
+              <div className="flex items-start gap-4 sm:gap-6">
+                <motion.div
+                  className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                  whileHover={!isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : undefined}
+                  whileTap={isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : { scale: 0.95 }}
+                  style={{
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
+                  }}
                 >
-                  Expert Management
-                </motion.span>{" "}
-                — Our seasoned team brings years of industry expertise to guide
-                your project from conception to completion, ensuring every
-                detail meets the highest standards.<br/><br/>
-                <motion.span
-                  className="font-semibold text-white"
-                  transition={{ delay: 0.4 }}
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-white/70" />
+                </motion.div>
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed font-light font-mulish flex-1" style={{ textShadow: "0 0 12px rgba(255, 255, 255, 0.15)", lineHeight: "2" }}>
+                  <motion.span className="font-semibold text-white" transition={{ delay: 0.2 }}>Expert Management</motion.span>{" "}
+                  — Our seasoned team brings years of industry expertise to guide your project from conception to completion, ensuring every detail meets the highest standards.
+                </p>
+              </div>
+
+              {/* Secure Investment */}
+              <div className="flex items-start gap-4 sm:gap-6">
+                <motion.div
+                  className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                  whileHover={!isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : undefined}
+                  whileTap={isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : { scale: 0.95 }}
+                  style={{
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
+                  }}
                 >
-                  Secure Investment
-                </motion.span>{" "}
-                — Your investment is protected through our transparent
-                processes, milestone-based payments, and comprehensive project
-                insurance that guarantees delivery.<br/><br/>
-                <motion.span
-                  className="font-semibold text-white"
-                  transition={{ delay: 0.6 }}
+                  <Lock className="w-5 h-5 sm:w-6 sm:h-6 text-white/70" />
+                </motion.div>
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed font-light font-mulish flex-1" style={{ textShadow: "0 0 12px rgba(255, 255, 255, 0.15)", lineHeight: "2" }}>
+                  <motion.span className="font-semibold text-white" transition={{ delay: 0.4 }}>Secure Investment</motion.span>{" "}
+                  — Your investment is protected through our transparent processes, milestone-based payments, and comprehensive project insurance that guarantees delivery.
+                </p>
+              </div>
+
+              {/* Increased Sales */}
+              <div className="flex items-start gap-4 sm:gap-6">
+                <motion.div
+                  className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                  whileHover={!isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : undefined}
+                  whileTap={isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : { scale: 0.95 }}
+                  style={{
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
+                  }}
                 >
-                  Increased Sales
-                </motion.span>{" "}
-                — Our data-driven approach and conversion-optimized designs have
-                consistently delivered 40-60% increases in client revenue within
-                the first quarter.<br/><br/>
-                <motion.span
-                  className="font-semibold text-white"
-                  transition={{ delay: 0.8 }}
+                  <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-white/70" />
+                </motion.div>
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed font-light font-mulish flex-1" style={{ textShadow: "0 0 12px rgba(255, 255, 255, 0.15)", lineHeight: "2" }}>
+                  <motion.span className="font-semibold text-white" transition={{ delay: 0.6 }}>Increased Sales</motion.span>{" "}
+                  — Our data-driven approach and conversion-optimized designs have consistently delivered 40-60% increases in client revenue within the first quarter.
+                </p>
+              </div>
+
+              {/* Happy Customers */}
+              <div className="flex items-start gap-4 sm:gap-6">
+                <motion.div
+                  className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center"
+                  whileHover={!isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : undefined}
+                  whileTap={isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : { scale: 0.95 }}
+                  style={{
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
+                  }}
                 >
-                  Happy Customers
-                </motion.span>{" "}
-                — With a 98% client satisfaction rate and long-term partnerships
-                spanning multiple projects, our commitment to excellence speaks
-                for itself.
-              </p>
+                  <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-white/70" />
+                </motion.div>
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed font-light font-mulish flex-1" style={{ textShadow: "0 0 12px rgba(255, 255, 255, 0.15)", lineHeight: "2" }}>
+                  <motion.span className="font-semibold text-white" transition={{ delay: 0.8 }}>Happy Customers</motion.span>{" "}
+                  — With a 98% client satisfaction rate and long-term partnerships spanning multiple projects, our commitment to excellence speaks for itself.
+                </p>
+              </div>
             </motion.div>
           </section>
         </div>
@@ -1504,7 +1516,7 @@ export default function Component() {
                 <motion.div
                   whileHover={!isTouchDevice ? { scale: 1.02 } : undefined}
                   whileTap={isTouchDevice ? { scale: 1.02 } : { scale: 0.98 }}
-                  className="relative z-50 cursor-pointer inline-block"
+                  className="relative z-50 cursor-pointer"
                   style={{ willChange: "transform" }}
                   onClick={() => scrollToSection("home")}
                 >
