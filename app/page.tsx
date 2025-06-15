@@ -564,7 +564,7 @@ export default function Component() {
                 icon: <Sparkles className="w-8 h-8 sm:w-10 sm:h-10" />,
                 title: "AI Powered",
                 description:
-                  "Intelligent recommendations and personalized shopping experience powered by machine learning",
+                  "Intelligent recommendations and personalized development experience powered by artificial intelligence",
               },
             ].map((feature, index) => (
               <motion.div
