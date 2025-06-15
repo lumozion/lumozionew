@@ -1398,6 +1398,34 @@ export default function Component() {
               ))}
             </div>
 
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 relative z-30"
+            >
+              <h2
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 text-white font-outfit tracking-wide max-w-5xl mx-auto"
+                style={{
+                  textShadow: "0 0 30px rgba(255, 255, 255, 0.4)",
+                  lineHeight: "1.2",
+                }}
+              >
+                Why Us?
+              </h2>
+              <p
+                className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto font-light leading-relaxed font-mulish px-2 sm:px-0"
+                style={{
+                  textShadow: "0 0 15px rgba(255, 255, 255, 0.2)",
+                  lineHeight: "1.6",
+                }}
+              >
+                Discover why businesses choose us for their digital transformation
+              </p>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
