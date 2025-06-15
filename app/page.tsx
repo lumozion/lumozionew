@@ -438,6 +438,7 @@ export default function Component() {
               transition={{ delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center relative z-30 pt-2 sm:pt-4"
             >
+              <a href="https://www.instagram.com/lumozion/" target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="bg-white/10 hover:bg-white/15 hover:scale-105 hover:shadow-2xl border-2 border-white/30 text-white rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium group backdrop-blur-md transition-all duration-300 font-mulish w-full sm:w-auto"
@@ -448,6 +449,8 @@ export default function Component() {
                 Get in touch
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
+              </a>
+              <a href="https://www.instagram.com/lumozion/" target="_blank" rel="noopener noreferrer">
               <Button
                 size="lg"
                 className="border-2 border-white/50 text-white hover:bg-white/10 hover:scale-105 hover:shadow-2xl rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium backdrop-blur-md bg-white/5 transition-all duration-300 font-mulish w-full sm:w-auto"
@@ -457,6 +460,7 @@ export default function Component() {
               >
                 Watch Demo
               </Button>
+              </a>
             </motion.div>
           </motion.div>
         </div>
