@@ -631,7 +631,7 @@ export default function Component() {
       {/* About Us Section with Perfect Responsive Layout */}
       <section
         id="about"
-        className="relative z-20 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12"
+        className="relative z-20 py-12 sm:py-16 xl:py-32 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12"
       >
         <div className="container mx-auto max-w-7xl">
           {/* Section Header */}
@@ -823,7 +823,7 @@ export default function Component() {
           {/* Our Services Section */}
           <section
             id="services"
-            className="relative z-20 mb-12 sm:mb-16 md:mb-20 lg:mb-24 min-h-screen"
+            className="relative z-20 mb-12 sm:mb-16 md:mb-20 lg:mb-24 min-h-screen pt-10"
           >
             {/* Services Header with Glitch Animation */}
             <motion.div
@@ -976,7 +976,7 @@ export default function Component() {
           </section>
 
           {/* Why Us Section */}
-          <section id="why-us" className="relative z-20">
+          <section id="why-us" className="relative z-20 pt-10">
             {/* Starlight Particle Background */}
             <div className="absolute inset-0 overflow-hidden">
               {Array.from({ length: 20 }, (_, i) => (
