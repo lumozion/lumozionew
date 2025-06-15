@@ -106,91 +106,100 @@
   font-variation-settings: "wght" var(--font-weight, 400);
 }
 
-/* Futuristic Logo Animation Keyframes */
+/* Enhanced Starlight Logo Animation */
 @keyframes cosmic-flicker {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 40px rgba(255, 255, 255, 0.4),
+      0 0 60px rgba(255, 255, 255, 0.2);
   }
-  2% {
+  25% {
     opacity: 0.95;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+    text-shadow: 
+      0 0 15px rgba(255, 255, 255, 0.6),
+      0 0 30px rgba(255, 255, 255, 0.3),
+      0 0 45px rgba(255, 255, 255, 0.1);
   }
-  4% {
+  50% {
     opacity: 1;
-    text-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
+    text-shadow: 
+      0 0 25px rgba(255, 255, 255, 0.9),
+      0 0 50px rgba(255, 255, 255, 0.5),
+      0 0 75px rgba(255, 255, 255, 0.3);
   }
-  8% {
+  75% {
     opacity: 0.98;
-    text-shadow: 0 0 14px rgba(255, 255, 255, 0.35);
-  }
-  12% {
-    opacity: 1;
-    text-shadow: 0 0 16px rgba(255, 255, 255, 0.45);
-  }
-  16% {
-    opacity: 0.97;
-    text-shadow: 0 0 13px rgba(255, 255, 255, 0.32);
-  }
-  20% {
-    opacity: 1;
-    text-shadow: 0 0 17px rgba(255, 255, 255, 0.48);
-  }
-  94% {
-    opacity: 1;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-  }
-  96% {
-    opacity: 0.96;
-    text-shadow: 0 0 11px rgba(255, 255, 255, 0.28);
-  }
-  98% {
-    opacity: 1;
-    text-shadow: 0 0 19px rgba(255, 255, 255, 0.52);
+    text-shadow: 
+      0 0 18px rgba(255, 255, 255, 0.7),
+      0 0 35px rgba(255, 255, 255, 0.4),
+      0 0 55px rgba(255, 255, 255, 0.2);
   }
 }
 
-@keyframes digital-pulse {
-  0%,
-  100% {
+@keyframes starlight-sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes cosmic-glow {
+  0%, 100% {
     filter: brightness(1) contrast(1);
   }
   25% {
-    filter: brightness(1.02) contrast(1.01);
+    filter: brightness(1.2) contrast(1.1);
   }
   50% {
-    filter: brightness(0.98) contrast(0.99);
+    filter: brightness(1.1) contrast(1.05);
   }
   75% {
-    filter: brightness(1.01) contrast(1.005);
+    filter: brightness(1.15) contrast(1.08);
   }
 }
 
-@keyframes subtle-shift {
-  0%,
-  100% {
-    transform: translateX(0) translateY(0);
-  }
-  33% {
-    transform: translateX(0.5px) translateY(-0.3px);
-  }
-  66% {
-    transform: translateX(-0.3px) translateY(0.5px);
-  }
-}
-
-/* Logo Animation Classes */
+/* Enhanced Logo Animation Classes */
 .logo-cosmic-flicker {
-  animation: cosmic-flicker 8s ease-in-out infinite, digital-pulse 6s ease-in-out infinite, subtle-shift 12s ease-in-out
-    infinite;
-  will-change: opacity, text-shadow, filter, transform;
+  position: relative;
+  animation: 
+    cosmic-flicker 4s ease-in-out infinite,
+    cosmic-glow 6s ease-in-out infinite;
+  will-change: opacity, text-shadow, filter;
+}
+
+.logo-cosmic-flicker::before,
+.logo-cosmic-flicker::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 4px;
+  z-index: -1;
+  animation: starlight-sparkle 3s ease-in-out infinite;
+}
+
+.logo-cosmic-flicker::after {
+  animation-delay: 1.5s;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 60%);
 }
 
 /* Mobile optimization - reduced animation complexity */
 @media (max-width: 768px) {
   .logo-cosmic-flicker {
-    animation: cosmic-flicker 10s ease-in-out infinite, digital-pulse 8s ease-in-out infinite;
+    animation: 
+      cosmic-flicker 5s ease-in-out infinite,
+      cosmic-glow 7s ease-in-out infinite;
+  }
+  
+  .logo-cosmic-flicker::before,
+  .logo-cosmic-flicker::after {
+    animation: starlight-sparkle 4s ease-in-out infinite;
   }
 }
 
@@ -199,6 +208,14 @@
   .logo-cosmic-flicker {
     animation: none;
     opacity: 1;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 40px rgba(255, 255, 255, 0.4);
+  }
+  
+  .logo-cosmic-flicker::before,
+  .logo-cosmic-flicker::after {
+    animation: none;
+    opacity: 0.5;
   }
 }
