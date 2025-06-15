@@ -1144,7 +1144,8 @@ export default function Component() {
                     lineHeight: "1.7",
                   }}
                 >
-                  Pioneering the future of digital commerce with cutting-edge technology and innovative solutions.
+                   Empowering businesses through innovation, design, and technology. Crafted with passion
+
                 </p>
               </div>
 
@@ -1185,119 +1186,4 @@ export default function Component() {
               </div>
 
               {/* Contact Info */}
-              <div className="space-y-4 sm:space-y-6 text-center md:text-left">
-                <h4
-                  className="text-base sm:text-lg font-semibold text-white font-outfit tracking-wide"
-                  style={{
-                    textShadow: "0 0 12px rgba(255, 255, 255, 0.2)",
-                  }}
-                >
-                  Connect
-                </h4>
-                <div className="space-y-2 sm:space-y-3">
-                  <motion.a
-                    href="#"
-                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
-                    whileHover={{ x: 4 }}
-                    style={{
-                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    <span className="relative">
-                      Contact Us
-                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
-                    </span>
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
-                    whileHover={{ x: 4 }}
-                    style={{
-                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    <span className="relative">
-                      Support
-                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
-                    </span>
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
-                    whileHover={{ x: 4 }}
-                    style={{
-                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    <span className="relative">
-                      Privacy Policy
-                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
-                    </span>
-                  </motion.a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="border-t border-white/10 py-4 sm:py-6 md:py-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
-              <p
-                className="text-white/60 text-xs sm:text-sm md:text-base font-light font-mulish text-center sm:text-left"
-                style={{
-                  textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
-                  lineHeight: "1.6",
-                }}
-              >
-                &copy; {new Date().getFullYear()} Lumozion. All rights reserved.
-              </p>
-
-              {/* Social Links */}
-              <div className="flex items-center space-x-3 sm:space-x-4">
-                <motion.a
-                  href="#"
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
-                  whileHover={{ scale: 1.1, boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)" }}
-                  whileTap={{ scale: 0.95 }}
-                  style={{
-                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
-                  }}
-                  aria-label="Follow us on Instagram"
-                >
-                  <Instagram className="w-3 h-3 sm:w-4 sm:h-4 text-white/70" />
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
-                  whileHover={{ scale: 1.1, boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)" }}
-                  whileTap={{ scale: 0.95 }}
-                  style={{
-                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
-                  }}
-                  aria-label="Follow us on Twitter"
-                >
-                  <Twitter className="w-3 h-3 sm:w-4 sm:h-4 text-white/70" />
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
-                  whileHover={{ scale: 1.1, boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)" }}
-                  whileTap={{ scale: 0.95 }}
-                  style={{
-                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
-                  }}
-                  aria-label="Subscribe to our YouTube channel"
-                >
-                  <Youtube className="w-3 h-3 sm:w-4 sm:h-4 text-white/70" />
-                </motion.a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  )
-}
+              <div cla
