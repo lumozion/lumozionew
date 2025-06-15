@@ -222,6 +222,151 @@ export default function Component() {
     );
   };
 
+  const AnimatedGetInTouchButton = () => {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const buttonRef = useRef<HTMLDivElement>(null);
+
+    // Mouse tracking for gradient effect
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+      if (buttonRef.current) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: ((e.clientX - rect.left) / rect.width) * 100,
+          y: ((e.clientY - rect.top) / rect.height) * 100,
+        });
+      }
+    }, []);
+
+    // Generate floating star particles
+    const stars = useMemo(() => {
+      return Array.from({ length: 8 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 2 + 1,
+        delay: Math.random() * 2,
+      }));
+    }, []);
+
+    return (
+      <motion.div
+        ref={buttonRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => setMousePosition({ x: 50, y: 50 })}
+        className="relative inline-block"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        style={{ willChange: "transform" }}
+      >
+        {/* Glowing outline effect */}
+        <motion.div
+          className="absolute inset-0 rounded-xl sm:rounded-2xl"
+          animate={{
+            boxShadow: [
+              "0 0 20px rgba(255, 255, 255, 0.3)",
+              "0 0 30px rgba(255, 255, 255, 0.5)",
+              "0 0 20px rgba(255, 255, 255, 0.3)",
+            ],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Interactive gradient overlay */}
+        <motion.div
+          className="absolute inset-0 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(255,255,255,0.15) 0%, transparent 50%)`,
+          }}
+        />
+
+        {/* Floating star particles */}
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            className="absolute w-1 h-1 bg-white rounded-full"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              opacity: 0.6,
+            }}
+            animate={{
+              y: [0, -10, 0],
+              opacity: [0.6, 0.8, 0.6],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 2 + star.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: star.delay,
+            }}
+          />
+        ))}
+
+        {/* Button content */}
+        <a href="https://www.instagram.com/lumozion/" target="_blank" rel="noopener noreferrer">
+          <Button
+            size="lg"
+            className="relative overflow-hidden bg-white/10 hover:bg-white/15 border-2 border-white/30 text-white rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium group backdrop-blur-md transition-all duration-300 font-mulish w-full sm:w-auto"
+            style={{
+              boxShadow: "0 0 25px rgba(255, 255, 255, 0.2)",
+            }}
+          >
+            {/* Shimmer effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              animate={{
+                x: ["-100%", "100%"],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+
+            {/* Text with futuristic animation */}
+            <motion.span
+              className="relative z-10 inline-flex items-center"
+              animate={{
+                textShadow: [
+                  "0 0 10px rgba(255, 255, 255, 0.5)",
+                  "0 0 20px rgba(255, 255, 255, 0.8)",
+                  "0 0 10px rgba(255, 255, 255, 0.5)",
+                ],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              Get in touch
+              <motion.div
+                className="ml-2 sm:ml-3"
+                animate={{
+                  x: [0, 4, 0],
+                  opacity: [0.8, 1, 0.8],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
+              </motion.div>
+            </motion.span>
+          </Button>
+        </a>
+      </motion.div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
       {/* Animated Background with Subtle Movement */}
@@ -544,28 +689,17 @@ export default function Component() {
               transition={{ delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center relative z-30 pt-2 sm:pt-4"
             >
+              <AnimatedGetInTouchButton />
               <a href="https://www.instagram.com/lumozion/" target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                className="bg-white/10 hover:bg-white/15 hover:scale-105 hover:shadow-2xl border-2 border-white/30 text-white rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium group backdrop-blur-md transition-all duration-300 font-mulish w-full sm:w-auto"
-                style={{
-                  boxShadow: "0 0 25px rgba(255, 255, 255, 0.2)",
-                }}
-              >
-                Get in touch
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" />
-              </Button>
-              </a>
-              <a href="https://www.instagram.com/lumozion/" target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                className="border-2 border-white/50 text-white hover:bg-white/10 hover:scale-105 hover:shadow-2xl rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium backdrop-blur-md bg-white/5 transition-all duration-300 font-mulish w-full sm:w-auto"
-                style={{
-                  boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
-                }}
-              >
-                Watch Demo
-              </Button>
+                <Button
+                  size="lg"
+                  className="border-2 border-white/50 text-white hover:bg-white/10 hover:scale-105 hover:shadow-2xl rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium backdrop-blur-md bg-white/5 transition-all duration-300 font-mulish w-full sm:w-auto"
+                  style={{
+                    boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
+                  }}
+                >
+                  Watch Demo
+                </Button>
               </a>
             </motion.div>
           </motion.div>
