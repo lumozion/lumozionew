@@ -375,20 +375,15 @@ export default function Component() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Main text with direct animation */}
+        {/* Text with shimmer mask */}
         <motion.span
-          className="relative inline-block"
+          className="relative inline-block bg-clip-text text-transparent bg-gradient-to-r from-white via-white/80 to-white"
+          style={{
+            WebkitBackgroundClip: "text",
+            backgroundSize: "200% 100%",
+          }}
           animate={{
-            textShadow: [
-              "0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3)",
-              "0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.5), 0 0 60px rgba(255, 0, 255, 0.3)",
-              "0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3)",
-            ],
-            filter: [
-              "brightness(1) contrast(1)",
-              "brightness(1.2) contrast(1.1)",
-              "brightness(1) contrast(1)",
-            ],
+            backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
           }}
           transition={{
             duration: 3,
@@ -399,18 +394,42 @@ export default function Component() {
           {children}
         </motion.span>
 
-        {/* Subtle glow trail */}
+        {/* Animated outline */}
         <motion.span
-          className="absolute inset-0 blur-sm opacity-50"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            WebkitTextStroke: "1px rgba(255, 255, 255, 0.3)",
+            color: "transparent",
+          }}
           animate={{
+            WebkitTextStroke: [
+              "1px rgba(255, 255, 255, 0.3)",
+              "1px rgba(255, 255, 255, 0.5)",
+              "1px rgba(255, 255, 255, 0.3)",
+            ],
             textShadow: [
-              "0 0 15px rgba(255, 255, 255, 0.3), 0 0 30px rgba(255, 255, 255, 0.2)",
-              "0 0 25px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3), 0 0 75px rgba(255, 0, 255, 0.2)",
-              "0 0 15px rgba(255, 255, 255, 0.3), 0 0 30px rgba(255, 255, 255, 0.2)",
+              "0 0 5px rgba(255, 255, 255, 0.2)",
+              "0 0 10px rgba(255, 255, 255, 0.4)",
+              "0 0 5px rgba(255, 255, 255, 0.2)",
             ],
           }}
           transition={{
-            duration: 3,
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          {children}
+        </motion.span>
+
+        {/* Subtle glow */}
+        <motion.span
+          className="absolute inset-0 blur-[2px] opacity-30"
+          animate={{
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 2,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -700,7 +719,7 @@ export default function Component() {
 
             {/* Hero Title with Perfect Responsive Typography */}
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-white leading-tight relative z-30 font-outfit tracking-wide max-w-6xl mx-auto"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold leading-tight relative z-30 font-outfit tracking-wide max-w-6xl mx-auto"
               style={{
                 lineHeight: "1.1",
               }}
@@ -709,7 +728,7 @@ export default function Component() {
                 <FuturisticText>Future Of</FuturisticText>
                 <br />
                 <FuturisticText>
-                  <span className="text-white font-outfit relative">
+                  <span className="font-outfit relative">
                     Web Development
                   </span>
                 </FuturisticText>
