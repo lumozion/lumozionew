@@ -37,6 +37,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${mulish.variable} ${inter.variable}`}>
       <head>
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="Lumozion - Future of Web Development" />
+        <meta property="og:description" content="Discover futuristic, high-performance websites built by Lumozion." />
+        <meta property="og:image" content="./logo.png" />
+        <meta property="og:url" content="https://lumozion.store" />
+        <meta property="og:type" content="website" />
         <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png"/>
