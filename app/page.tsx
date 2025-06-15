@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState, useMemo } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { useState, useMemo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Zap,
   Shield,
@@ -15,23 +15,23 @@ import {
   Code,
   Palette,
   Bot,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 export default function Component() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
+    const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMenuOpen(false) // Close mobile menu if open
-  }
+    setIsMenuOpen(false); // Close mobile menu if open
+  };
 
   // Optimized stars with subtle movement
   const stars = useMemo(() => {
@@ -43,40 +43,68 @@ export default function Component() {
       delay: Math.random() * 4,
       moveX: (Math.random() - 0.5) * 2, // Subtle horizontal movement
       moveY: (Math.random() - 0.5) * 2, // Subtle vertical movement
-    }))
-  }, [])
+    }));
+  }, []);
 
   // Optimized SVG Components with reduced filters
   const TechSVG = ({ className }: { className?: string }) => (
-    <svg className={className} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={className}
+      viewBox="0 0 200 200"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <defs>
         <linearGradient id="techGlow" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0.2" />
         </linearGradient>
       </defs>
-      <polygon points="100,30 170,100 100,170 30,100" fill="none" stroke="url(#techGlow)" strokeWidth="2" />
-      <polygon points="100,60 140,100 100,140 60,100" fill="url(#techGlow)" opacity="0.2" />
+      <polygon
+        points="100,30 170,100 100,170 30,100"
+        fill="none"
+        stroke="url(#techGlow)"
+        strokeWidth="2"
+      />
+      <polygon
+        points="100,60 140,100 100,140 60,100"
+        fill="url(#techGlow)"
+        opacity="0.2"
+      />
       <circle cx="100" cy="100" r="8" fill="#ffffff" />
     </svg>
-  )
+  );
 
   const FutureSVG = ({ className }: { className?: string }) => (
-    <svg className={className} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={className}
+      viewBox="0 0 200 200"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <defs>
         <linearGradient id="futureGlow" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0.1" />
         </linearGradient>
       </defs>
-      <path d="M100 40 L160 100 L100 160 L40 100 Z" fill="none" stroke="url(#futureGlow)" strokeWidth="2" />
-      <path d="M100 60 L140 100 L100 140 L60 100 Z" fill="url(#futureGlow)" opacity="0.15" />
+      <path
+        d="M100 40 L160 100 L100 160 L40 100 Z"
+        fill="none"
+        stroke="url(#futureGlow)"
+        strokeWidth="2"
+      />
+      <path
+        d="M100 60 L140 100 L100 140 L60 100 Z"
+        fill="url(#futureGlow)"
+        opacity="0.15"
+      />
       <circle cx="100" cy="70" r="3" fill="#ffffff" />
       <circle cx="130" cy="100" r="3" fill="#ffffff" />
       <circle cx="100" cy="130" r="3" fill="#ffffff" />
       <circle cx="70" cy="100" r="3" fill="#ffffff" />
     </svg>
-  )
+  );
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
@@ -303,7 +331,10 @@ export default function Component() {
             <motion.button
               className="md:hidden p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 relative z-50 overflow-hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 25px rgba(255, 255, 255, 0.15)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 8px 25px rgba(255, 255, 255, 0.15)",
+              }}
               whileTap={{ scale: 0.95 }}
               style={{ willChange: "transform" }}
             >
@@ -323,7 +354,11 @@ export default function Component() {
                   ease: "easeInOut",
                 }}
               />
-              {isMenuOpen ? <X className="relative z-10 w-5 h-5" /> : <Menu className="relative z-10 w-5 h-5" />}
+              {isMenuOpen ? (
+                <X className="relative z-10 w-5 h-5" />
+              ) : (
+                <Menu className="relative z-10 w-5 h-5" />
+              )}
             </motion.button>
           </div>
         </div>
@@ -519,8 +554,9 @@ export default function Component() {
                 lineHeight: "1.6",
               }}
             >
-              Experience the next generation of online success with Lumozion's cutting-edge web development, crafting
-              immersive digital solutions for your business.
+              Experience the next generation of online success with Lumozion's
+              cutting-edge web development, crafting immersive digital solutions
+              for your business.
             </motion.p>
 
             {/* Hero Buttons with Perfect Responsive Sizing */}
@@ -555,35 +591,53 @@ export default function Component() {
 
         {/* Floating Elements with Perfect Responsive Positioning */}
         <motion.div
-          style={{ y, willChange: "transform" }}
+          style={{
+            y,
+            willChange: "transform",
+            boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)",
+          }}
           className="absolute top-16 left-2 w-12 h-12 sm:top-20 sm:left-4 sm:w-16 sm:h-16 md:top-24 md:left-8 md:w-20 md:h-20 lg:top-32 lg:left-16 lg:w-24 lg:h-24 xl:w-32 xl:h-32 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center hover:scale-110 transition-all duration-500"
           animate={{
             rotate: 360,
             scale: [1, 1.05, 1],
           }}
           transition={{
-            rotate: { duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-            scale: { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
-          }}
-          style={{
-            boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)",
+            rotate: {
+              duration: 30,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            },
+            scale: {
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            },
           }}
         >
           <TechSVG className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-16 xl:h-16" />
         </motion.div>
         <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]), willChange: "transform" }}
+          style={{
+            y: useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]),
+            willChange: "transform",
+            boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)",
+          }}
           className="absolute bottom-16 right-2 w-10 h-10 sm:bottom-20 sm:right-4 sm:w-12 sm:h-12 md:bottom-24 md:right-8 md:w-16 md:h-16 lg:bottom-32 lg:right-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center hover:scale-110 transition-all duration-500"
           animate={{
             rotate: -360,
             scale: [1, 1.08, 1],
           }}
           transition={{
-            rotate: { duration: 25, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-            scale: { duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
-          }}
-          style={{
-            boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)",
+            rotate: {
+              duration: 25,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            },
+            scale: {
+              duration: 6,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            },
           }}
         >
           <FutureSVG className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-16 xl:h-16" />
@@ -631,7 +685,8 @@ export default function Component() {
               {
                 icon: <Shield className="w-8 h-8 sm:w-10 sm:h-10" />,
                 title: "Secure & Safe",
-                description: "Advanced security measures and encryption to protect your data and transactions",
+                description:
+                  "Advanced security measures and encryption to protect your data and transactions",
               },
               {
                 icon: <Sparkles className="w-8 h-8 sm:w-10 sm:h-10" />,
@@ -646,7 +701,11 @@ export default function Component() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.6 }}
-                whileHover={{ scale: 1.03, y: -8, boxShadow: "0 20px 40px rgba(255, 255, 255, 0.1)" }}
+                whileHover={{
+                  scale: 1.03,
+                  y: -8,
+                  boxShadow: "0 20px 40px rgba(255, 255, 255, 0.1)",
+                }}
                 className="group relative z-30"
                 style={{ willChange: "transform" }}
               >
@@ -659,7 +718,10 @@ export default function Component() {
                   <div className="text-center space-y-4 sm:space-y-6">
                     <motion.div
                       className="inline-flex p-4 sm:p-5 md:p-6 rounded-2xl sm:rounded-3xl bg-white/10 text-white backdrop-blur-md border border-white/20"
-                      whileHover={{ scale: 1.1, boxShadow: "0 15px 30px rgba(255, 255, 255, 0.2)" }}
+                      whileHover={{
+                        scale: 1.1,
+                        boxShadow: "0 15px 30px rgba(255, 255, 255, 0.2)",
+                      }}
                       transition={{ duration: 0.3 }}
                       style={{
                         boxShadow: "0 0 20px rgba(255, 255, 255, 0.2)",
@@ -724,8 +786,8 @@ export default function Component() {
                 lineHeight: "1.6",
               }}
             >
-              We are a team of futuristic developers building immersive web, design, and automation solutions for
-              next-gen businesses.
+              We are a team of futuristic developers building immersive web,
+              design, and automation solutions for next-gen businesses.
             </p>
           </motion.div>
 
@@ -762,7 +824,8 @@ export default function Component() {
                   className="absolute inset-0 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   whileHover={{ opacity: 0.3 }}
                   style={{
-                    background: "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)",
+                    background:
+                      "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)",
                   }}
                 />
 
@@ -775,10 +838,12 @@ export default function Component() {
                     <motion.div
                       className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 mx-auto rounded-full overflow-hidden border-2 border-white/30 backdrop-blur-sm relative"
                       style={{
-                        boxShadow: "0 8px 32px rgba(255, 255, 255, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.1)",
+                        boxShadow:
+                          "0 8px 32px rgba(255, 255, 255, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.1)",
                       }}
                       whileHover={{
-                        boxShadow: "0 12px 40px rgba(255, 255, 255, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.15)",
+                        boxShadow:
+                          "0 12px 40px rgba(255, 255, 255, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.15)",
                       }}
                     >
                       <img
@@ -786,7 +851,8 @@ export default function Component() {
                         alt="Ashwin Asthana"
                         className="w-full h-full object-cover transition-all duration-500"
                         style={{
-                          filter: "brightness(1.1) contrast(1.1) saturate(1.05)",
+                          filter:
+                            "brightness(1.1) contrast(1.1) saturate(1.05)",
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -795,7 +861,8 @@ export default function Component() {
                       <motion.div
                         className="absolute inset-0 rounded-full"
                         style={{
-                          background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%)",
+                          background:
+                            "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%)",
                         }}
                         animate={{
                           opacity: [0.3, 0.6, 0.3],
@@ -812,7 +879,8 @@ export default function Component() {
                     <motion.div
                       className="absolute inset-0 rounded-full border-2 border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                       style={{
-                        boxShadow: "0 0 25px rgba(255, 255, 255, 0.4), inset 0 0 25px rgba(255, 255, 255, 0.1)",
+                        boxShadow:
+                          "0 0 25px rgba(255, 255, 255, 0.4), inset 0 0 25px rgba(255, 255, 255, 0.1)",
                       }}
                       animate={{
                         rotate: 360,
@@ -881,7 +949,10 @@ export default function Component() {
           </motion.div>
 
           {/* Our Services Section */}
-          <section id="services" className="relative z-20 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
+          <section
+            id="services"
+            className="relative z-20 mb-12 sm:mb-16 md:mb-20 lg:mb-24"
+          >
             {/* Services Header with Glitch Animation */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -1081,8 +1152,9 @@ export default function Component() {
                 >
                   Expert Management
                 </motion.span>{" "}
-                — Our seasoned team brings years of industry expertise to guide your project from conception to
-                completion, ensuring every detail meets the highest standards.{" "}
+                — Our seasoned team brings years of industry expertise to guide
+                your project from conception to completion, ensuring every
+                detail meets the highest standards.{" "}
                 <motion.span
                   className="font-semibold text-white"
                   initial={{ opacity: 0 }}
@@ -1091,8 +1163,9 @@ export default function Component() {
                 >
                   Secure Investment
                 </motion.span>{" "}
-                — Your investment is protected through our transparent processes, milestone-based payments, and
-                comprehensive project insurance that guarantees delivery.{" "}
+                — Your investment is protected through our transparent
+                processes, milestone-based payments, and comprehensive project
+                insurance that guarantees delivery.{" "}
                 <motion.span
                   className="font-semibold text-white"
                   initial={{ opacity: 0 }}
@@ -1101,8 +1174,9 @@ export default function Component() {
                 >
                   Increased Sales
                 </motion.span>{" "}
-                — Our data-driven approach and conversion-optimized designs have consistently delivered 40-60% increases
-                in client revenue within the first quarter.{" "}
+                — Our data-driven approach and conversion-optimized designs have
+                consistently delivered 40-60% increases in client revenue within
+                the first quarter.{" "}
                 <motion.span
                   className="font-semibold text-white"
                   initial={{ opacity: 0 }}
@@ -1111,8 +1185,9 @@ export default function Component() {
                 >
                   Happy Customers
                 </motion.span>{" "}
-                — With a 98% client satisfaction rate and long-term partnerships spanning multiple projects, our
-                commitment to excellence speaks for itself.
+                — With a 98% client satisfaction rate and long-term partnerships
+                spanning multiple projects, our commitment to excellence speaks
+                for itself.
               </p>
             </motion.div>
           </section>
@@ -1127,7 +1202,10 @@ export default function Component() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
               {/* Brand Section */}
               <div className="lg:col-span-2 space-y-4 sm:space-y-6 text-center md:text-left">
-                <motion.div whileHover={{ scale: 1.02 }} className="inline-block">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="inline-block"
+                >
                   <h3
                     className="text-xl sm:text-2xl md:text-3xl font-bold text-white font-outfit tracking-wider cursor-pointer transition-all duration-300"
                     style={{
@@ -1144,7 +1222,8 @@ export default function Component() {
                     lineHeight: "1.7",
                   }}
                 >
-                   Empowering businesses through innovation, design, and technology. Crafted with passion
+                   Empowering businesses through innovation, design, and
+                  technology. Crafted with passion
 
                 </p>
               </div>
@@ -1186,4 +1265,128 @@ export default function Component() {
               </div>
 
               {/* Contact Info */}
-              <div cla
+              <div className="space-y-4 sm:space-y-6 text-center md:text-left">
+                <h4
+                  className="text-base sm:text-lg font-semibold text-white font-outfit tracking-wide"
+                  style={{
+                    textShadow: "0 0 12px rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  Connect
+                </h4>
+                <div className="space-y-2 sm:space-y-3">
+                  <motion.a
+                    href="#"
+                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
+                    whileHover={{ x: 4 }}
+                    style={{
+                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    <span className="relative">
+                      Contact Us
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                  </motion.a>
+                  <motion.a
+                    href="#"
+                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
+                    whileHover={{ x: 4 }}
+                    style={{
+                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    <span className="relative">
+                      Support
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                  </motion.a>
+                  <motion.a
+                    href="#"
+                    className="block text-white/70 hover:text-white transition-all duration-300 text-sm sm:text-base font-light font-mulish group"
+                    whileHover={{ x: 4 }}
+                    style={{
+                      textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    <span className="relative">
+                      Privacy Policy
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+                    </span>
+                  </motion.a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-white/10 py-4 sm:py-6 md:py-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+              <p
+                className="text-white/60 text-xs sm:text-sm md:text-base font-light font-mulish text-center sm:text-left"
+                style={{
+                  textShadow: "0 0 6px rgba(255, 255, 255, 0.1)",
+                  lineHeight: "1.6",
+                }}
+              >
+                &copy; {new Date().getFullYear()} Lumozion. All rights reserved.
+              </p>
+
+              {/* Social Links */}
+              <div className="flex items-center space-x-3 sm:space-x-4">
+                <motion.a
+                  href="#"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
+                  }}
+                  aria-label="Follow us on Instagram"
+                >
+                  <Instagram className="w-3 h-3 sm:w-4 sm:h-4 text-white/70" />
+                </motion.a>
+                <motion.a
+                  href="#"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
+                  }}
+                  aria-label="Follow us on Twitter"
+                >
+                  <Twitter className="w-3 h-3 sm:w-4 sm:h-4 text-white/70" />
+                </motion.a>
+                <motion.a
+                  href="#"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
+                  }}
+                  aria-label="Subscribe to our YouTube channel"
+                >
+                  <Youtube className="w-3 h-3 sm:w-4 sm:h-4 text-white/70" />
+                </motion.a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
