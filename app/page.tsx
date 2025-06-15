@@ -1192,7 +1192,7 @@ export default function Component() {
               {/* Social Links */}
               <div className="flex items-center space-x-3 sm:space-x-4">
                 <motion.a
-                  href="#"
+                  href="https://www.instagram.com/lumozion?igsh=MXJqOTJvYmNvNmV1ag=="
                   className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
                   whileHover={{
                     scale: 1.1,
@@ -1207,7 +1207,7 @@ export default function Component() {
                   <Instagram className="w-3 h-3 sm:w-4 sm:h-4 text-white/70" />
                 </motion.a>
                 <motion.a
-                  href="#"
+                  href="https://x.com/AshwinAsth40452"
                   className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
                   whileHover={{
                     scale: 1.1,
@@ -1222,7 +1222,7 @@ export default function Component() {
                   <Twitter className="w-3 h-3 sm:w-4 sm:h-4 text-white/70" />
                 </motion.a>
                 <motion.a
-                  href="#"
+                  href="https://youtube.com/@lumozion?si=fwYDBpk8gw59EzO2"
                   className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
                   whileHover={{
                     scale: 1.1,
