@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef, useCallback } from "react";
+import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Zap,
@@ -19,10 +19,32 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
+// Custom hook to detect touch devices
+const useIsTouchDevice = () => {
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const checkTouchDevice = () => {
+      setIsTouchDevice(
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        (navigator as any).msMaxTouchPoints > 0
+      );
+    };
+    
+    checkTouchDevice();
+    window.addEventListener('resize', checkTouchDevice);
+    return () => window.removeEventListener('resize', checkTouchDevice);
+  }, []);
+
+  return isTouchDevice;
+};
+
 export default function Component() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const isTouchDevice = useIsTouchDevice();
 
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
@@ -135,11 +157,14 @@ export default function Component() {
         ref={badgeRef}
         className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 relative overflow-hidden group"
         onMouseMove={handleMouseMove}
-        whileHover={{ 
+        whileHover={!isTouchDevice ? { 
           scale: 1.05,
           boxShadow: "0 0 30px rgba(255, 255, 255, 0.2)",
-        }}
-        whileTap={{ scale: 0.95 }}
+        } : undefined}
+        whileTap={isTouchDevice ? { 
+          scale: 1.05,
+          boxShadow: "0 0 30px rgba(255, 255, 255, 0.2)",
+        } : { scale: 0.95 }}
         transition={{ duration: 0.3 }}
       >
         {/* Interactive gradient overlay */}
@@ -254,8 +279,8 @@ export default function Component() {
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setMousePosition({ x: 50, y: 50 })}
         className="relative inline-block"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={!isTouchDevice ? { scale: 1.05 } : undefined}
+        whileTap={isTouchDevice ? { scale: 1.05 } : { scale: 0.95 }}
         style={{ willChange: "transform" }}
       >
         {/* Glowing outline effect */}
@@ -546,8 +571,8 @@ export default function Component() {
           <div className="flex items-center justify-between">
             {/* Enhanced Logo with Perfect Responsive Sizing */}
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={!isTouchDevice ? { scale: 1.02 } : undefined}
+              whileTap={isTouchDevice ? { scale: 1.02 } : { scale: 0.98 }}
               className="relative z-50 cursor-pointer"
               style={{ willChange: "transform" }}
               onClick={() => scrollToSection("home")}
@@ -576,8 +601,8 @@ export default function Component() {
                 <motion.button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={!isTouchDevice ? { scale: 1.05 } : undefined}
+                  whileTap={isTouchDevice ? { scale: 1.05 } : { scale: 0.95 }}
                   className="text-white/90 hover:text-white transition-all duration-300 relative group font-medium font-mulish text-sm lg:text-base xl:text-lg overflow-hidden"
                 >
                   {/* Starlight Glow Background */}
@@ -610,11 +635,14 @@ export default function Component() {
             <motion.button
               className="md:hidden p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 relative z-50 overflow-hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              whileHover={{
+              whileHover={!isTouchDevice ? {
                 scale: 1.05,
                 boxShadow: "0 8px 25px rgba(255, 255, 255, 0.15)",
-              }}
-              whileTap={{ scale: 0.95 }}
+              } : undefined}
+              whileTap={isTouchDevice ? {
+                scale: 1.05,
+                boxShadow: "0 8px 25px rgba(255, 255, 255, 0.15)",
+              } : undefined}
               style={{ willChange: "transform" }}
             >
               {/* Button Glow Effect */}
@@ -781,7 +809,9 @@ export default function Component() {
             willChange: "transform",
             boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)",
           }}
-          className="absolute top-20 left-2 w-12 h-12 sm:top-20 sm:left-4 sm:w-16 sm:h-16 md:top-24 md:left-8 md:w-20 md:h-20 lg:top-32 lg:left-16 lg:w-24 lg:h-24 xl:w-32 xl:h-32 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center hover:scale-110 transition-all duration-500"
+          className="absolute top-20 left-2 w-12 h-12 sm:top-20 sm:left-4 sm:w-16 sm:h-16 md:top-24 md:left-8 md:w-20 md:h-20 lg:top-32 lg:left-16 lg:w-24 lg:h-24 xl:w-32 xl:h-32 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-500"
+          whileHover={!isTouchDevice ? { scale: 1.1 } : undefined}
+          whileTap={isTouchDevice ? { scale: 1.1 } : undefined}
           animate={{
             rotate: 360,
             scale: [1, 1.05, 1],
@@ -807,7 +837,9 @@ export default function Component() {
             willChange: "transform",
             boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)",
           }}
-          className="absolute bottom-16 right-2 w-10 h-10 sm:bottom-20 sm:right-4 sm:w-12 sm:h-12 md:bottom-24 md:right-8 md:w-16 md:h-16 lg:bottom-32 lg:right-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center hover:scale-110 transition-all duration-500"
+          className="absolute bottom-16 right-2 w-10 h-10 sm:bottom-20 sm:right-4 sm:w-12 sm:h-12 md:bottom-24 md:right-8 md:w-16 md:h-16 lg:bottom-32 lg:right-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 rounded-2xl sm:rounded-3xl bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-500"
+          whileHover={!isTouchDevice ? { scale: 1.1 } : undefined}
+          whileTap={isTouchDevice ? { scale: 1.1 } : undefined}
           animate={{
             rotate: -360,
             scale: [1, 1.08, 1],
@@ -886,11 +918,16 @@ export default function Component() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.6 }}
-                whileHover={{
+                whileHover={!isTouchDevice ? {
                   scale: 1.03,
                   y: -8,
                   boxShadow: "0 20px 40px rgba(255, 255, 255, 0.1)",
-                }}
+                } : undefined}
+                whileTap={isTouchDevice ? {
+                  scale: 1.03,
+                  y: -8,
+                  boxShadow: "0 20px 40px rgba(255, 255, 255, 0.1)",
+                } : undefined}
                 className="group relative z-30"
                 style={{ willChange: "transform" }}
               >
@@ -991,11 +1028,16 @@ export default function Component() {
             className="flex justify-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 relative z-30"
           >
             <motion.div
-              whileHover={{
+              whileHover={!isTouchDevice ? {
                 scale: 1.03,
                 y: -8,
                 boxShadow: "0 25px 50px rgba(255, 255, 255, 0.2)",
-              }}
+              } : undefined}
+              whileTap={isTouchDevice ? {
+                scale: 1.03,
+                y: -8,
+                boxShadow: "0 25px 50px rgba(255, 255, 255, 0.2)",
+              } : undefined}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
               <Card
@@ -1237,6 +1279,16 @@ export default function Component() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2, duration: 0.6 }}
+                  whileHover={!isTouchDevice ? {
+                    scale: 1.03,
+                    y: -8,
+                    boxShadow: "0 20px 40px rgba(255, 255, 255, 0.1)",
+                  } : undefined}
+                  whileTap={isTouchDevice ? {
+                    scale: 1.03,
+                    y: -8,
+                    boxShadow: "0 20px 40px rgba(255, 255, 255, 0.1)",
+                  } : undefined}
                   className="group relative z-30"
                   style={{ willChange: "transform" }}
                 >
@@ -1450,8 +1502,8 @@ export default function Component() {
               {/* Brand Section */}
               <div className="space-y-4 sm:space-y-6 text-center md:text-left">
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={!isTouchDevice ? { scale: 1.02 } : undefined}
+                  whileTap={isTouchDevice ? { scale: 1.02 } : { scale: 0.98 }}
                   className="relative z-50 cursor-pointer inline-block"
                   style={{ willChange: "transform" }}
                   onClick={() => scrollToSection("home")}
@@ -1537,11 +1589,14 @@ export default function Component() {
                 <motion.a
                   href="https://www.instagram.com/lumozion?igsh=MXJqOTJvYmNvNmV1ag=="
                   className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/15 transition-all duration-300"
-                  whileHover={{
+                  whileHover={!isTouchDevice ? {
                     scale: 1.1,
                     boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
+                  } : undefined}
+                  whileTap={isTouchDevice ? {
+                    scale: 1.1,
+                    boxShadow: "0 4px 12px rgba(255, 255, 255, 0.15)",
+                  } : { scale: 0.95 }}
                   style={{
                     boxShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
                   }}
