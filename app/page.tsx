@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, memo, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Zap,
@@ -19,8 +19,125 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-export default function Component() {
+// Memoize the star elements to prevent unnecessary re-renders
+const StarElements = memo(() => (
+  <>
+    {Array.from({ length: 10 }).map((_, index) => (
+      <span
+        key={`star-${index}`}
+        className="star"
+        style={{
+          animationDelay: `${index * 0.2}s`,
+        }}
+      />
+    ))}
+  </>
+));
+
+StarElements.displayName = 'StarElements';
+
+// Optimize the logo component
+const Logo = memo(() => (
+  <motion.div
+    className="relative"
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{
+      duration: 0.8,
+      ease: [0.4, 0, 0.2, 1],
+    }}
+    whileHover={{
+      scale: 1.02,
+      transition: { duration: 0.2 }
+    }}
+  >
+    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white logo-cosmic-flicker">
+      LUMOZION
+      <StarElements />
+    </h1>
+  </motion.div>
+));
+
+Logo.displayName = 'Logo';
+
+// Optimize the navigation component
+const Navigation = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <Logo />
+        <div className="flex items-center space-x-4 md:space-x-6">
+          <motion.button
+            className="md:hidden text-white p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            whileTap={{ scale: 0.95 }}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            <div className="w-6 h-5 relative">
+              <span className={`absolute w-6 h-0.5 bg-white transform transition-all duration-300 ${isMenuOpen ? 'rotate-45 top-2' : 'top-0'}`} />
+              <span className={`absolute w-6 h-0.5 bg-white top-2 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
+              <span className={`absolute w-6 h-0.5 bg-white transform transition-all duration-300 ${isMenuOpen ? '-rotate-45 top-2' : 'top-4'}`} />
+            </div>
+          </motion.button>
+          
+          <motion.div
+            ref={menuRef}
+            className={`fixed md:relative top-0 right-0 h-full md:h-auto w-64 md:w-auto bg-black/95 md:bg-transparent p-6 md:p-0 transform transition-transform duration-300 ease-in-out ${
+              isMenuOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
+            }`}
+            initial={false}
+          >
+            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+              {['Home', 'About', 'Services', 'Contact'].map((item) => (
+                <motion.a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-white hover:text-blue-400 transition-colors duration-200 text-lg md:text-base"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </nav>
+  );
+});
+
+Navigation.displayName = 'Navigation';
+
+export default function Component() {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
@@ -30,7 +147,6 @@ export default function Component() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMenuOpen(false); // Close mobile menu if open
   };
 
   // Optimized stars with subtle movement
@@ -199,174 +315,7 @@ export default function Component() {
       />
 
       {/* Enhanced Navigation with Perfect Responsive Sizing */}
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="relative z-50 backdrop-blur-lg bg-white/5 border-b border-white/20"
-        style={{
-          willChange: "transform",
-          boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)",
-        }}
-      >
-        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 py-3 sm:py-4 lg:py-5">
-          <div className="flex items-center justify-between">
-            {/* Enhanced Logo with Perfect Responsive Sizing */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="relative z-50 cursor-pointer"
-              style={{ willChange: "transform" }}
-              onClick={() => scrollToSection("home")}
-            >
-              <h1
-                className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white relative z-10 font-outfit tracking-wider transition-all duration-300 px-1 sm:px-2 py-1 logo-cosmic-flicker"
-                style={{
-                  lineHeight: "1.2",
-                }}
-              >
-                LUMOZION
-                {Array.from({ length: 10 }, (_, i) => (
-                  <span key={i} className="star" />
-                ))}
-              </h1>
-            </motion.div>
-
-            {/* Desktop Menu with Perfect Responsive Spacing */}
-            <div className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8 2xl:space-x-10 relative z-50">
-              {[
-                { name: "Home", id: "home" },
-                { name: "About", id: "about" },
-                { name: "Services", id: "services" },
-                { name: "Why Us", id: "why-us" },
-              ].map((item) => (
-                <motion.button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.id)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="text-white/90 hover:text-white transition-all duration-300 relative group font-medium font-mulish text-sm lg:text-base xl:text-lg overflow-hidden"
-                >
-                  {/* Starlight Glow Background */}
-
-
-                  {/* Cosmic Glow Effect */}
-                  
-
-                  {/* Starlight Particles */}
-                  
-
-                  <span className="relative z-10">{item.name}</span>
-
-                  {/* Enhanced Underline */}
-                  <motion.span
-                    className="absolute -bottom-2 left-0 h-0.5 bg-gradient-to-r from-white/50 via-white to-white/50 rounded-full"
-                    initial={{ width: 0, opacity: 0 }}
-                    whileHover={{
-                      width: "100%",
-                      opacity: 1,
-                      boxShadow: "0 0 8px rgba(255,255,255,0.6)",
-                    }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  />
-                </motion.button>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button with Perfect Sizing */}
-            <motion.button
-              className="md:hidden p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 relative z-50 overflow-hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 8px 25px rgba(255, 255, 255, 0.15)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              style={{ willChange: "transform" }}
-            >
-              {/* Button Glow Effect */}
-              
-              {isMenuOpen ? (
-                <X className="relative z-10 w-5 h-5" />
-              ) : (
-                <Menu className="relative z-10 w-5 h-5" />
-              )}
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Enhanced Mobile Menu with Perfect Responsive Layout */}
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{
-              duration: 0.4,
-              ease: "easeOut",
-              type: "spring",
-              stiffness: 300,
-              damping: 30,
-            }}
-            className="md:hidden backdrop-blur-md bg-white/10 border-t border-white/20 rounded-b-2xl sm:rounded-b-3xl mx-3 sm:mx-4 mb-3 sm:mb-4 relative z-40 overflow-hidden"
-          >
-            {/* Starlight Burst Background */}
-          
-  
-
-            {/* Cosmic Particles */}
-          
-
-            <div className="px-4 sm:px-6 py-5 sm:py-6 space-y-4 sm:space-y-6 relative z-10">
-              {[
-                { name: "Home", id: "home" },
-                { name: "About", id: "about" },
-                { name: "Services", id: "services" },
-                { name: "Why Us", id: "why-us" },
-              ].map((item, index) => (
-                <motion.button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left text-white/90 hover:text-white transition-all duration-300 font-medium font-mulish text-base sm:text-lg relative overflow-hidden group"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    delay: 0.1 + index * 0.1,
-                    duration: 0.4,
-                    ease: "easeOut",
-                  }}
-                >
-                  {/* Mobile Link Glow Effect */}
-                 
-
-                  {/* Sparkle Effect */}
-                  <motion.div
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-white/60 rounded-full opacity-0 group-hover:opacity-100"
-                    animate={{
-                      scale: [0, 1, 0],
-                      rotate: [0, 180, 360],
-                    }}
-                    transition={{
-                      duration: 1,
-                      repeat: Number.POSITIVE_INFINITY,
-                      ease: "easeInOut",
-                    }}
-                  />
-
-                  <span className="relative z-10">{item.name}</span>
-                </motion.button>
-              ))}
-            </div>
-
-            {/* Bottom Glow Effect */}
-            <motion.div
-              className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
-            />
-          </motion.div>
-        )}
-      </motion.nav>
+      <Navigation />
 
       {/* Hero Section with Perfect Responsive Typography */}
       <section

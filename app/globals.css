@@ -112,55 +112,33 @@
     opacity: 1;
     text-shadow: 
       0 0 10px rgba(255, 255, 255, 0.8),
-      0 0 20px rgba(255, 255, 255, 0.4),
-      0 0 30px rgba(255, 255, 255, 0.2);
+      0 0 20px rgba(255, 255, 255, 0.4);
   }
-  25% {
+  50% {
     opacity: 0.95;
     text-shadow: 
       0 0 15px rgba(255, 255, 255, 0.6),
-      0 0 25px rgba(255, 255, 255, 0.3),
-      0 0 35px rgba(255, 255, 255, 0.1);
-  }
-  50% {
-    opacity: 1;
-    text-shadow: 
-      0 0 20px rgba(255, 255, 255, 0.9),
-      0 0 30px rgba(255, 255, 255, 0.5),
-      0 0 40px rgba(255, 255, 255, 0.3);
-  }
-  75% {
-    opacity: 0.98;
-    text-shadow: 
-      0 0 12px rgba(255, 255, 255, 0.7),
-      0 0 22px rgba(255, 255, 255, 0.4),
-      0 0 32px rgba(255, 255, 255, 0.2);
+      0 0 25px rgba(255, 255, 255, 0.3);
   }
 }
 
 @keyframes star-twinkle {
   0%, 100% {
     opacity: 0;
-    transform: scale(0.5) rotate(0deg);
+    transform: scale(0.5);
   }
   50% {
     opacity: 1;
-    transform: scale(1.2) rotate(180deg);
+    transform: scale(1.2);
   }
 }
 
 @keyframes star-float {
   0%, 100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(2px, -2px) rotate(90deg);
+    transform: translate(0, 0);
   }
   50% {
-    transform: translate(0, -4px) rotate(180deg);
-  }
-  75% {
-    transform: translate(-2px, -2px) rotate(270deg);
+    transform: translate(0, -4px);
   }
 }
 
@@ -169,6 +147,8 @@
   position: relative;
   animation: cosmic-flicker 4s ease-in-out infinite;
   will-change: opacity, text-shadow;
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
 }
 
 .logo-cosmic-flicker::before {
@@ -195,18 +175,22 @@
   background: white;
   border-radius: 50%;
   animation: star-twinkle 2s ease-in-out infinite, star-float 3s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-.logo-cosmic-flicker .star:nth-child(1) { top: 0; left: 10%; animation-delay: 0s; }
-.logo-cosmic-flicker .star:nth-child(2) { top: 20%; left: 30%; animation-delay: 0.3s; }
-.logo-cosmic-flicker .star:nth-child(3) { top: 40%; left: 50%; animation-delay: 0.6s; }
-.logo-cosmic-flicker .star:nth-child(4) { top: 60%; left: 70%; animation-delay: 0.9s; }
-.logo-cosmic-flicker .star:nth-child(5) { top: 80%; left: 90%; animation-delay: 1.2s; }
-.logo-cosmic-flicker .star:nth-child(6) { top: 10%; left: 80%; animation-delay: 1.5s; }
-.logo-cosmic-flicker .star:nth-child(7) { top: 30%; left: 60%; animation-delay: 1.8s; }
-.logo-cosmic-flicker .star:nth-child(8) { top: 50%; left: 40%; animation-delay: 2.1s; }
-.logo-cosmic-flicker .star:nth-child(9) { top: 70%; left: 20%; animation-delay: 2.4s; }
-.logo-cosmic-flicker .star:nth-child(10) { top: 90%; left: 0; animation-delay: 2.7s; }
+.logo-cosmic-flicker .star:nth-child(1) { top: 5%; left: 15%; animation-delay: 0s; }
+.logo-cosmic-flicker .star:nth-child(2) { top: 25%; left: 35%; animation-delay: 0.2s; }
+.logo-cosmic-flicker .star:nth-child(3) { top: 45%; left: 55%; animation-delay: 0.4s; }
+.logo-cosmic-flicker .star:nth-child(4) { top: 65%; left: 75%; animation-delay: 0.6s; }
+.logo-cosmic-flicker .star:nth-child(5) { top: 85%; left: 85%; animation-delay: 0.8s; }
+.logo-cosmic-flicker .star:nth-child(6) { top: 15%; left: 65%; animation-delay: 1.0s; }
+.logo-cosmic-flicker .star:nth-child(7) { top: 35%; left: 45%; animation-delay: 1.2s; }
+.logo-cosmic-flicker .star:nth-child(8) { top: 55%; left: 25%; animation-delay: 1.4s; }
+.logo-cosmic-flicker .star:nth-child(9) { top: 75%; left: 5%; animation-delay: 1.6s; }
+.logo-cosmic-flicker .star:nth-child(10) { top: 95%; left: 15%; animation-delay: 1.8s; }
 
 /* Mobile optimization - reduced animation complexity */
 @media (max-width: 768px) {
@@ -215,7 +199,16 @@
   }
   
   .logo-cosmic-flicker .star {
+    width: 1.5px;
+    height: 1.5px;
     animation: star-twinkle 3s ease-in-out infinite, star-float 4s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-cosmic-flicker .star {
+    width: 1px;
+    height: 1px;
   }
 }
 
@@ -224,13 +217,29 @@
   .logo-cosmic-flicker {
     animation: none;
     opacity: 1;
-    text-shadow: 
-      0 0 20px rgba(255, 255, 255, 0.8),
-      0 0 40px rgba(255, 255, 255, 0.4);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
   }
   
   .logo-cosmic-flicker .star {
     animation: none;
     opacity: 0.5;
   }
+}
+
+/* Low battery mode optimization */
+@media (prefers-reduced-data: reduce) {
+  .logo-cosmic-flicker {
+    animation: none;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  }
+  
+  .logo-cosmic-flicker .star {
+    display: none;
+  }
+}
+
+/* Performance Optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+  backface-visibility: hidden;
 }
