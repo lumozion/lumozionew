@@ -1451,15 +1451,22 @@ export default function Component() {
               <div className="space-y-4 sm:space-y-6 text-center md:text-left">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="inline-block"
+                  whileTap={{ scale: 0.98 }}
+                  className="relative z-50 cursor-pointer inline-block"
+                  style={{ willChange: "transform" }}
+                  onClick={() => scrollToSection("home")}
                 >
                   <h3
-                    className="text-xl sm:text-2xl md:text-3xl font-bold text-white font-outfit tracking-wider cursor-pointer transition-all duration-300"
+                    className="text-xl sm:text-2xl md:text-3xl font-bold text-white relative z-10 font-outfit tracking-wider transition-all duration-300 px-1 sm:px-2 py-1 logo-cosmic-flicker"
                     style={{
+                      lineHeight: "1.2",
                       textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
                     }}
                   >
                     LUMOZION
+                    {Array.from({ length: 10 }, (_, i) => (
+                      <span key={i} className="star" />
+                    ))}
                   </h3>
                 </motion.div>
                 <p
@@ -1469,9 +1476,8 @@ export default function Component() {
                     lineHeight: "1.7",
                   }}
                 >
-                   Empowering businesses through innovation, design, and
+                  Empowering businesses through innovation, design, and
                   technology. Crafted with passion
-
                 </p>
               </div>
 
