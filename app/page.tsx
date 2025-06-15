@@ -106,6 +106,26 @@ export default function Component() {
     </svg>
   );
 
+  const Sparkles = ({ className }: { className?: string }) => {
+    return (
+      <svg
+        className={className}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 2L14.5 8.5L21 9L16 13.5L17.5 20L12 17L6.5 20L8 13.5L3 9L9.5 8.5L12 2Z"
+          fill="currentColor"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  };
+
   const AnimatedInterfaceBadge = () => {
     const badgeRef = useRef<HTMLDivElement>(null);
     const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
@@ -199,6 +219,26 @@ export default function Component() {
 
         {/* Content */}
         <div className="relative z-10 flex items-center">
+          <motion.div
+            animate={{
+              rotate: [0, 360],
+              scale: [1, 1.1, 1],
+            }}
+            transition={{
+              rotate: {
+                duration: 20,
+                repeat: Infinity,
+                ease: "linear",
+              },
+              scale: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
+          >
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-white/90" />
+          </motion.div>
           <motion.span
             className="text-xs sm:text-sm md:text-base font-medium text-white/90 font-mulish tracking-wide"
             animate={{
