@@ -35,7 +35,7 @@ const useIsTouchDevice = () => {
         (navigator as any).msMaxTouchPoints > 0
       );
     };
-    
+
     checkTouchDevice();
     window.addEventListener('resize', checkTouchDevice);
     return () => window.removeEventListener('resize', checkTouchDevice);
@@ -137,7 +137,7 @@ export default function Component() {
     const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
 
     // Generate star particles
-    const starParticles = useMemo(() => 
+    const starParticles = useMemo(() =>
       Array.from({ length: 5 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
@@ -161,11 +161,11 @@ export default function Component() {
         ref={badgeRef}
         className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/20 relative overflow-hidden group"
         onMouseMove={handleMouseMove}
-        whileHover={!isTouchDevice ? { 
+        whileHover={!isTouchDevice ? {
           scale: 1.05,
           boxShadow: "0 0 30px rgba(255, 255, 255, 0.2)",
         } : undefined}
-        whileTap={isTouchDevice ? { 
+        whileTap={isTouchDevice ? {
           scale: 1.05,
           boxShadow: "0 0 30px rgba(255, 255, 255, 0.2)",
         } : { scale: 0.95 }}
@@ -337,7 +337,8 @@ export default function Component() {
         ))}
 
         {/* Button content */}
-        <a href="mailto:info@lumozion.store" target="_blank" rel="noopener noreferrer">
+        <a href="https://wa.me/918178763231?text=Hi%20Ashwin%2C%20I%27m%20interested%20in%20building%20a%20website%20with%20Lumozion.%20Can%20you%20tell%20me%20more%20about%20your%20packages%3F
+" target="_blank" rel="noopener noreferrer">
           <Button
             size="lg"
             className="relative overflow-hidden bg-white/10 hover:bg-white/15 border-2 border-white/30 text-white rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium group backdrop-blur-md transition-all duration-300 font-mulish w-full sm:w-auto"
@@ -613,10 +614,10 @@ export default function Component() {
 
 
                   {/* Cosmic Glow Effect */}
-                  
+
 
                   {/* Starlight Particles */}
-                  
+
 
                   <span className="relative z-10">{item.name}</span>
 
@@ -650,7 +651,7 @@ export default function Component() {
               style={{ willChange: "transform" }}
             >
               {/* Button Glow Effect */}
-              
+
               {isMenuOpen ? (
                 <X className="relative z-10 w-5 h-5" />
               ) : (
@@ -676,11 +677,11 @@ export default function Component() {
             className="md:hidden backdrop-blur-md bg-white/10 border-t border-white/20 rounded-b-2xl sm:rounded-b-3xl mx-3 sm:mx-4 mb-3 sm:mb-4 relative z-40 overflow-hidden"
           >
             {/* Starlight Burst Background */}
-          
-  
+
+
 
             {/* Cosmic Particles */}
-          
+
 
             <div className="px-4 sm:px-6 py-5 sm:py-6 space-y-4 sm:space-y-6 relative z-10">
               {[
@@ -702,7 +703,7 @@ export default function Component() {
                   }}
                 >
                   {/* Mobile Link Glow Effect */}
-                 
+
 
                   {/* Sparkle Effect */}
                   <motion.div
@@ -791,7 +792,7 @@ export default function Component() {
               className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center relative z-30 pt-2 sm:pt-4"
             >
               <AnimatedGetInTouchButton />
-              <a href="https://www.instagram.com/lumozion/" target="_blank" rel="noopener noreferrer">
+              <a href="mailto:info@lumozion.store" target="_blank" rel="noopener noreferrer">
                 <Button
                   size="lg"
                   className="border-2 border-white/50 text-white hover:bg-white/10 hover:scale-105 hover:shadow-2xl rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium backdrop-blur-md bg-white/5 transition-all duration-300 font-mulish w-full sm:w-auto"
@@ -799,7 +800,7 @@ export default function Component() {
                     boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)",
                   }}
                 >
-                  Watch Demo
+                  Email Us
                 </Button>
               </a>
             </motion.div>
