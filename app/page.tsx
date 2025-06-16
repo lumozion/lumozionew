@@ -337,7 +337,7 @@ export default function Component() {
         ))}
 
         {/* Button content */}
-        <a href="https://www.instagram.com/lumozion/" target="_blank" rel="noopener noreferrer">
+        <a href="mailto:info@lumozion.store" target="_blank" rel="noopener noreferrer">
           <Button
             size="lg"
             className="relative overflow-hidden bg-white/10 hover:bg-white/15 border-2 border-white/30 text-white rounded-xl sm:rounded-2xl px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg lg:text-xl font-medium group backdrop-blur-md transition-all duration-300 font-mulish w-full sm:w-auto"
