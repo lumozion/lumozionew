@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Outfit, Mulish } from "next/font/google"
 import "./globals.css"
+import { GoogleTagManager } from '@next/third-parties/google'
 
 // Primary futuristic font for headings, logo, and brand elements
 const outfit = Outfit({
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${mulish.variable} ${inter.variable}`}>
       <head>
+        <GoogleTagManager gtmId="G-34GJPGNNY8" />
         <meta property="og:title" content="Lumozion - Future of Web Development" />
         <meta property="og:description" content="Discover futuristic, high-performance websites built by Lumozion." />
         <meta property="og:image" content="./logo.jpeg" />
