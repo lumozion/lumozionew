@@ -247,6 +247,8 @@
 div:has(a[href*="thinkstack"]),
 a[href*="thinkstack.ai"],
 a[href*="utm_campaign=chatbot"],
+p:has(a[href*="thinkstack.ai"]),
+p:has(strong a[href*="utm_campaign=chatbot"]),
 *[class*="chat-footer"],
 *[class*="chat-branding"],
 iframe + div[class*="footer"],
