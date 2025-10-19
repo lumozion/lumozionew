@@ -64,29 +64,6 @@ export default function RootLayout({
           data-type="default"
           src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js"
         ></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            const observer = new MutationObserver(() => {
-              document.querySelectorAll('*').forEach(el => {
-                if (el.textContent && (el.textContent.includes('Powered by') || el.textContent.includes('Thinkstack'))) {
-                  el.remove();
-                }
-                if (el.href && el.href.includes('thinkstack')) {
-                  el.remove();
-                }
-              });
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
-            
-            setInterval(() => {
-              document.querySelectorAll('*').forEach(el => {
-                if (el.textContent && (el.textContent.includes('Powered by') || el.textContent.includes('Thinkstack'))) {
-                  el.remove();
-                }
-              });
-            }, 500);
-          `
-        }} />
       </body>
     </html>
   )
