@@ -57,14 +57,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png"/>
         <link rel="manifest" href="./site.webmanifest"/>
       </head>
-      <body className="font-mulish antialiased">
-        {children}
-        <script
-          chatbot_id="68f4c7a10dd9e72ea40c7f75"
-          data-type="default"
-          src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js"
-        ></script>
-      </body>
+      <body className="font-mulish antialiased">{children}</body>
     </html>
   )
 }
