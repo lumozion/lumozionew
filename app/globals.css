@@ -234,3 +234,14 @@
     opacity: 0.5;
   }
 }
+
+/* Hide ThinkStack watermark */
+[data-testid="thinkstack-watermark"],
+.thinkstack-watermark,
+.powered-by-thinkstack,
+[class*="watermark"],
+[id*="watermark"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
