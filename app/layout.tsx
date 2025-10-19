@@ -64,6 +64,23 @@ export default function RootLayout({
           data-type="default"
           src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js"
         ></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            setInterval(() => {
+              const elements = document.querySelectorAll('p, div, span, a');
+              elements.forEach(el => {
+                if (el.textContent && el.textContent.includes('Powered by')) {
+                  el.style.display = 'none';
+                  if (el.parentElement) el.parentElement.style.display = 'none';
+                }
+                if (el.href && el.href.includes('thinkstack.ai')) {
+                  el.style.display = 'none';
+                  if (el.parentElement) el.parentElement.style.display = 'none';
+                }
+              });
+            }, 1000);
+          `
+        }} />
       </body>
     </html>
   )
