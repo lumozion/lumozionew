@@ -66,19 +66,25 @@ export default function RootLayout({
         ></script>
         <script dangerouslySetInnerHTML={{
           __html: `
-            setInterval(() => {
-              const elements = document.querySelectorAll('p, div, span, a');
-              elements.forEach(el => {
-                if (el.textContent && el.textContent.includes('Powered by')) {
-                  el.style.display = 'none';
-                  if (el.parentElement) el.parentElement.style.display = 'none';
+            const observer = new MutationObserver(() => {
+              document.querySelectorAll('*').forEach(el => {
+                if (el.textContent && (el.textContent.includes('Powered by') || el.textContent.includes('Thinkstack'))) {
+                  el.remove();
                 }
-                if (el.href && el.href.includes('thinkstack.ai')) {
-                  el.style.display = 'none';
-                  if (el.parentElement) el.parentElement.style.display = 'none';
+                if (el.href && el.href.includes('thinkstack')) {
+                  el.remove();
                 }
               });
-            }, 1000);
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+            
+            setInterval(() => {
+              document.querySelectorAll('*').forEach(el => {
+                if (el.textContent && (el.textContent.includes('Powered by') || el.textContent.includes('Thinkstack'))) {
+                  el.remove();
+                }
+              });
+            }, 500);
           `
         }} />
       </body>
