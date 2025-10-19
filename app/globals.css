@@ -240,8 +240,19 @@
 .thinkstack-watermark,
 .powered-by-thinkstack,
 [class*="watermark"],
-[id*="watermark"] {
+[id*="watermark"],
+[class*="powered-by"],
+[class*="branding"],
+[class*="footer"] a[href*="thinkstack"],
+div:has(a[href*="thinkstack"]),
+a[href*="thinkstack.ai"],
+*[class*="chat-footer"],
+*[class*="chat-branding"],
+iframe + div[class*="footer"],
+iframe + div[class*="brand"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
