@@ -246,6 +246,7 @@
 [class*="footer"] a[href*="thinkstack"],
 div:has(a[href*="thinkstack"]),
 a[href*="thinkstack.ai"],
+a[href*="utm_campaign=chatbot"],
 *[class*="chat-footer"],
 *[class*="chat-branding"],
 iframe + div[class*="footer"],
