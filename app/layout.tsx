@@ -38,15 +38,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${mulish.variable} ${inter.variable}`}>
       <head>
-        <!-- Google tag (gtag.js) -->
-         <script async src="https://www.googletagmanager.com/gtag/js?id=G-34GJPGNNY8"></script>
-       <script>
-        window.dataLayer = window.dataLayer || [];
-       function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-34GJPGNNY8');
-</script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-34GJPGNNY8"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-34GJPGNNY8');
+          `
+        }} />
         <meta property="og:title" content="Lumozion - Future of Web Development" />
         <meta property="og:description" content="Discover futuristic, high-performance websites built by Lumozion." />
         <meta property="og:image" content="./logo.jpeg" />
